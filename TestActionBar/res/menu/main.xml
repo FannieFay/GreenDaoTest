@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/action_sure"
+        android:icon="@drawable/abc_ic_search_api_holo_light"
+        android:orderInCategory="101"
+        android:title="@string/sure"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="102"
+        android:title="delete"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/abc_ic_search"
+        android:orderInCategory="103"
+        android:title="search"
+        app:showAsAction="ifRoom|collapseActionView"/>
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light"
+        android:orderInCategory="104"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom"/>
+
+</menu>
