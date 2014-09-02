@@ -44,6 +44,17 @@ public class BookListAdapter extends BaseAdapter
                 .displayer(new FadeInBitmapDisplayer(100)).build();
     }
 
+    public void setList(ArrayList<BookInfo> aBookInfos)
+    {
+        this.aBookInfos = aBookInfos;
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<BookInfo> getList()
+    {
+        return this.aBookInfos;
+    }
+
     @Override
     public int getCount()
     {

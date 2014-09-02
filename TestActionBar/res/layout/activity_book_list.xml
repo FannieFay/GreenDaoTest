@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     tools:context=".BookListActivity" >
 
-  <ListView 
-      android:id="@+id/booklistListView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-  </ListView>
+    <com.example.testactionbar.widget.PullToRefreshListViewState
+        android:id="@+id/booklistListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.example.testactionbar.widget.PullToRefreshListViewState>
 
 </RelativeLayout>

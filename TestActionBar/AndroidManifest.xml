@@ -16,14 +16,14 @@
         android:label="@string/app_name" >
         <activity
             android:name="com.example.testactionbar.view.MyViewPage"
-            android:label="@string/title_activity_my_view_page" >
+            android:label="@string/title_activity_my_view_page">
         </activity>
         <!--  -->
         <activity android:name="com.example.testactionbar.view.ListLinks" >
         </activity>
         <!-- 分类列表 -->
         <activity android:name="com.example.testactionbar.view.ThemeActivity" >
-            <intent-filter>
+              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,14 +36,16 @@
         <activity android:name="com.example.testactionbar.view.RankActivity" >
         </activity>
         <!-- 书籍列表 -->
-        <activity
-            android:name="com.example.testactionbar.view.BookListActivity"
-            >
+        <activity android:name="com.example.testactionbar.view.BookListActivity" >
+            
         </activity>
-         <!-- 书籍简介 -->
-        <activity
-            android:name="com.example.testactionbar.view.BookContent"
-            >
+        <!-- 书籍简介 -->
+        <activity android:name="com.example.testactionbar.view.BookContent" 
+             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+        <!-- 测试 -->
+        <activity android:name="com.example.testactionbar.view.Test" 
+           >
         </activity>
     </application>
 

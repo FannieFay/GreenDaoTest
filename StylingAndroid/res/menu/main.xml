@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/mail_refresh"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:title="Refresh"
+        app:showAsAction="always|withText"/>
+    <item
+        android:id="@+id/test"
+        android:orderInCategory="1"
+        android:title="test"
+        app:showAsAction="ifRoom"/>
+</menu>

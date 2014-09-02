@@ -16,6 +16,8 @@ import android.os.Message;
 import android.widget.TextView;
 
 import com.example.testactionbar.common.Constans;
+import com.example.testactionbar.common.Constans.BookTypeUrl;
+import com.example.testactionbar.common.Constans.RankUrl;
 
 /**
  * Example program to list links from a URL.
@@ -117,7 +119,7 @@ public class ListLinks extends Activity
                 Document doc = null;
                 try
                 {
-                    doc = Jsoup.connect(Constans.url + "list/sort.html").get();
+                    doc = Jsoup.connect(RankUrl.total).get();
                 } catch (IOException e)
                 {
                     e.printStackTrace();
@@ -156,7 +158,7 @@ public class ListLinks extends Activity
                 Document doc = null;
                 try
                 {
-                    doc = Jsoup.connect(Constans.url + "list/tongren-1.html").get();
+                    doc = Jsoup.connect(BookTypeUrl.tongren).get();
                 } catch (IOException e)
                 {
                     e.printStackTrace();

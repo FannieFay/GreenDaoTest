@@ -52,7 +52,6 @@ public class BookListPresenter
                 {
                     doc = Jsoup.connect(url).get();
                     ArrayList<BookInfo> arrayList = BookInfo.getBookInfoByType(doc);
-
                     mView.getBookListByTypeSuccess(arrayList);
                 } catch (IOException e)
                 {

@@ -36,41 +36,41 @@ public class TypeActivity extends Activity
 
             switch (i)
             {
-            case 0:
-                typeName = BookTypeName.xunhuan;
-                typeUrl = BookTypeUrl.xunhuan;
-                break;
-            case 1:
-                typeName = BookTypeName.yanqing;
-                typeUrl = BookTypeUrl.yanqing;
-                break;
-            case 2:
-                typeName = BookTypeName.xianxia;
-                typeUrl = BookTypeUrl.xianxia;
-                break;
-            case 3:
-                typeName = BookTypeName.lishi;
-                typeUrl = BookTypeUrl.lishi;
-                break;
-            case 4:
-                typeName = BookTypeName.wangyou;
-                typeUrl = BookTypeUrl.wangyou;
-                break;
-            case 5:
-                typeName = BookTypeName.lingyi;
-                typeUrl = BookTypeUrl.lingyi;
-                break;
-            case 6:
-                typeName = BookTypeName.tongren;
-                typeUrl = BookTypeUrl.tongren;
-                break;
-            case 7:
-                typeName = BookTypeName.quanben;
-                typeUrl = BookTypeUrl.quanben;
-                break;
+                case 0:
+                    typeName = BookTypeName.xunhuan;
+                    typeUrl = BookTypeUrl.xunhuan;
+                    break;
+                case 1:
+                    typeName = BookTypeName.yanqing;
+                    typeUrl = BookTypeUrl.yanqing;
+                    break;
+                case 2:
+                    typeName = BookTypeName.xianxia;
+                    typeUrl = BookTypeUrl.xianxia;
+                    break;
+                case 3:
+                    typeName = BookTypeName.lishi;
+                    typeUrl = BookTypeUrl.lishi;
+                    break;
+                case 4:
+                    typeName = BookTypeName.wangyou;
+                    typeUrl = BookTypeUrl.wangyou;
+                    break;
+                case 5:
+                    typeName = BookTypeName.lingyi;
+                    typeUrl = BookTypeUrl.lingyi;
+                    break;
+                case 6:
+                    typeName = BookTypeName.tongren;
+                    typeUrl = BookTypeUrl.tongren;
+                    break;
+                case 7:
+                    typeName = BookTypeName.quanben;
+                    typeUrl = BookTypeUrl.quanben;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             final String url = typeUrl;
@@ -84,8 +84,7 @@ public class TypeActivity extends Activity
                     Intent intent = new Intent();
                     intent.setClass(TypeActivity.this, BookListActivity.class);
                     intent.putExtra(BookListActivity.BOOKLISTURL, url);
-                    intent.putExtra(BookListActivity.BOOKLIST_TYPE,
-                            BookListActivity.type_type);
+                    intent.putExtra(BookListActivity.BOOKLIST_TYPE, BookListActivity.type_type);
                     startActivity(intent);
                 }
             });

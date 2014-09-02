@@ -18,6 +18,9 @@ import com.example.testactionbar.R;
 import com.example.testactionbar.adapter.BookListAdapter;
 import com.example.testactionbar.presenter.BookListPresenter;
 import com.example.testactionbar.presenter.modle.BookInfo;
+import com.example.testactionbar.widget.PullToRefreshListViewState;
+import com.example.testactionbar.widget.PullToRefreshListViewState.RefreshState;
+import com.example.testactionbar.widget.PullToRefreshListViewState.StatePullToRefreshListener;
 
 public class BookListActivity extends Activity implements IBookListView, OnItemClickListener
 {
@@ -26,6 +29,8 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
     public static final String type_rank = "type_rank";
     public static final String type_search = "type_search";
     public static final String type_type = "type_type";
+
+    PullToRefreshListViewState mPullToRefreshListViewState;
 
     String url = null;
     String type = null;
@@ -45,13 +50,16 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
 
     private void initView()
     {
-        mBookListView = (ListView) findViewById(R.id.booklistListView);
+        mPullToRefreshListViewState = (PullToRefreshListViewState) findViewById(R.id.booklistListView);
+
+        mBookListView = mPullToRefreshListViewState.getListView();
         mBookListView.setOnItemClickListener(this);
         url = getIntent().getStringExtra(BOOKLISTURL);
         type = getIntent().getStringExtra(BOOKLIST_TYPE);
         Log.e("BookListUrl:", url);
         if (type.equals(type_type))
         {
+            mPullToRefreshListViewState.showViewByRefreshState(RefreshState.LOADING);
             mPresenter.getBookListByType(url);
         }
         else if (type.equals(type_search))
@@ -61,6 +69,22 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
         else if (type.equals(type_rank))
         {
         }
+
+        mPullToRefreshListViewState.setStatePullToRefreshListener(new StatePullToRefreshListener()
+        {
+
+            @Override
+            public void onStatePullDownToRefresh()
+            {
+                mPresenter.getBookListByType(url);
+            }
+
+            @Override
+            public void onStateLoadMore()
+            {
+
+            }
+        });
     }
 
     @Override
@@ -109,9 +133,17 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
             switch (msg.what)
             {
                 case 1:
+                    mPullToRefreshListViewState.showViewByRefreshState(RefreshState.DATA_FULL);
                     ArrayList<BookInfo> arrayList = (ArrayList<BookInfo>) msg.obj;
-                    mBookListAdapter = new BookListAdapter(BookListActivity.this, arrayList);
-                    mBookListView.setAdapter(mBookListAdapter);
+                    if (mBookListAdapter == null)
+                    {
+                        mBookListAdapter = new BookListAdapter(BookListActivity.this, arrayList);
+                        mBookListView.setAdapter(mBookListAdapter);
+                    }
+                    else
+                    {
+                        mBookListAdapter.setList(arrayList);
+                    }
                     break;
                 default:
                     break;

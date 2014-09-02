@@ -3,33 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-    
-    <ImageView 
+
+    <ImageView
         android:id="@+id/adapterBookListImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    
-    <LinearLayout 
+        android:layout_width="60dp"
+        android:layout_height="75dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <TextView 
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical" >
+		
+        <TextView
             android:id="@+id/adapterBookListBookName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView 
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/book_list_size"/>
+
+        <TextView
             android:id="@+id/adapterBookListNewChapter"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/book_list_size"/>
     </LinearLayout>
-    
-    
-    
-    
 
 </LinearLayout>

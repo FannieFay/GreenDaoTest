@@ -1,7 +1,16 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-
+    <!-- 距离左边 -->
+    <dimen name="margin_left">15dp</dimen>
+    <!-- 距离右边 -->
+    <dimen name="margin_right">15dp</dimen>
+    <!-- 字体大小 -->
+    <dimen name="word_size">16dp</dimen>
+    <!-- 行间距 -->
+    <dimen name="line_spacing">3dp</dimen>
+    <!-- 距离top-->
+    <dimen name="marginTop">25dp</dimen>
+    
+    <dimen name="book_list_size">15sp</dimen>
 </resources>
