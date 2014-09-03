@@ -19,7 +19,7 @@ public class BookInfo implements Serializable
     String state; // 状态 完结 连载
     String detailIntroduce;// 详细简介
     String detailNewChapter;// 详细的最新章节
-    ArrayList<Character> characters;// 章节列表
+    ArrayList<Chapter> characters;// 章节列表
 
     /**
      * 获取书本信息
@@ -27,12 +27,21 @@ public class BookInfo implements Serializable
      * @param doc
      * @return
      */
-    public static ArrayList<BookInfo> getBookInfoByType(Document doc)
+    public static BookInfoExpand getBookInfoByType(Document doc)
     {
-
+        BookInfoExpand bookInfoExpand = new BookInfoExpand();
         ArrayList<BookInfo> arrayList = new ArrayList<BookInfo>();
         Elements elementsByClass = doc.select("div[class=content clearfix]");
         Elements elementsLink = elementsByClass.select("span[class=list-item]");
+
+        Elements elementsByPage = doc.select("div[class=page][id=page]");
+        Elements elementsByPages = elementsByPage.select("a[href]");
+        int pageSize = elementsByPages.size();
+        Element maxElement = elementsByPages.get(pageSize - 1);
+        String maxHref = maxElement.attr("abs:href");
+
+        String string[] = maxHref.split("-");
+        int maxIndex = Integer.parseInt(string[1].replace(".html", ""));
 
         if (elementsLink.size() != 0)
         {
@@ -42,7 +51,9 @@ public class BookInfo implements Serializable
                 arrayList.add(getBookInfo(lElement));
             }
         }
-        return arrayList;
+        bookInfoExpand.setaBookInfos(arrayList);
+        bookInfoExpand.setMaxIndex(maxIndex);
+        return bookInfoExpand;
     }
 
     private static BookInfo getBookInfo(Element lElement)
@@ -101,7 +112,8 @@ public class BookInfo implements Serializable
 
         bookInfo.setDetailIntroduce(detailIntroduce.toString());
         Elements elements2 = doc.select("div[class=zhangjie clear]");
-        Elements elementsChapter = elements2.select("a[href]");
+        Elements elements3 = elements2.select("ul[id=chapterList]");
+        Elements elementsChapter = elements3.select("a[href]");
 
         ArrayList<Chapter> chapters = new ArrayList<Chapter>();
         for (int i = 0; i < elementsChapter.size(); i++)
@@ -114,7 +126,7 @@ public class BookInfo implements Serializable
             chapter.setUrl(url);
             chapters.add(chapter);
         }
-
+        bookInfo.setCharacters(chapters);
         return bookInfo;
     }
 
@@ -208,12 +220,12 @@ public class BookInfo implements Serializable
         this.detailNewChapter = detailNewChapter;
     }
 
-    public ArrayList<Character> getCharacters()
+    public ArrayList<Chapter> getCharacters()
     {
         return characters;
     }
 
-    public void setCharacters(ArrayList<Character> characters)
+    public void setCharacters(ArrayList<Chapter> characters)
     {
         this.characters = characters;
     }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.testactionbar.R;
 import com.example.testactionbar.presenter.modle.BookInfo;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -32,16 +33,18 @@ public class BookListAdapter extends BaseAdapter
         this.aBookInfos = aBookInfos;
         imageLoader = ImageLoader.getInstance();
         ImageLoaderConfiguration mConfiguration = new ImageLoaderConfiguration.Builder(mContext)
-                .memoryCacheExtraOptions(100, 100).threadPoolSize(5)
-                .threadPriority(Thread.NORM_PRIORITY - 2).build();
+                .memoryCacheExtraOptions(480, 800).threadPoolSize(5)
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024)).memoryCacheSize(2 * 1024 * 1024)
+                .memoryCacheSizePercentage(13) // default
+                .threadPriority(Thread.NORM_PRIORITY - 1).build();
         imageLoader.init(mConfiguration);
 
-        options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.icon) // 设置图片在下载期间显示的图片
-                .showImageForEmptyUri(R.drawable.ic_launcher)// 设置图片Uri为空或是错误的时候显示的图片
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.default_bookk_pic) // 设置图片在下载期间显示的图片
+                .showImageForEmptyUri(R.drawable.default_bookk_pic)// 设置图片Uri为空或是错误的时候显示的图片
                 .cacheInMemory(true)// 设置下载的图片是否缓存在内存中
-                .cacheOnDisc(true)// 设置下载的图片是否缓存在SD卡中
-                .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型//
-                .displayer(new FadeInBitmapDisplayer(100)).build();
+                .bitmapConfig(Bitmap.Config.ARGB_8888)// 设置图片的解码类型//
+                .displayer(new FadeInBitmapDisplayer(0)).build();
     }
 
     public void setList(ArrayList<BookInfo> aBookInfos)

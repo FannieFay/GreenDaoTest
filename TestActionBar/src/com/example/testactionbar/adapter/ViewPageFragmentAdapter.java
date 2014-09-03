@@ -15,6 +15,12 @@ public class ViewPageFragmentAdapter extends FragmentPagerAdapter
         super(fm);
     }
 
+    public void setList(List<Fragment> fragments)
+    {
+        this.fragments = fragments;
+        notifyDataSetChanged();
+    }
+
     public ViewPageFragmentAdapter(FragmentManager fm, List<Fragment> fragments)
     {
         super(fm);

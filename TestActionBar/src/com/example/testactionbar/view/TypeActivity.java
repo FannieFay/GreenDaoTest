@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.Constans.BookTypeName;
 import com.example.testactionbar.common.Constans.BookTypeUrl;
+import com.example.testactionbar.common.IntentKey;
 
 public class TypeActivity extends Activity
 {
@@ -82,9 +83,8 @@ public class TypeActivity extends Activity
                 public void onClick(View v)
                 {
                     Intent intent = new Intent();
-                    intent.setClass(TypeActivity.this, BookListActivity.class);
-                    intent.putExtra(BookListActivity.BOOKLISTURL, url);
-                    intent.putExtra(BookListActivity.BOOKLIST_TYPE, BookListActivity.type_type);
+                    intent.setClass(TypeActivity.this, BookListByTypeActivity.class);
+                    intent.putExtra(IntentKey.INTENT_URL_KEY, url);
                     startActivity(intent);
                 }
             });

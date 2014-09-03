@@ -16,14 +16,14 @@
         android:label="@string/app_name" >
         <activity
             android:name="com.example.testactionbar.view.MyViewPage"
-            android:label="@string/title_activity_my_view_page">
+            android:label="@string/title_activity_my_view_page" >
         </activity>
         <!--  -->
         <activity android:name="com.example.testactionbar.view.ListLinks" >
         </activity>
         <!-- 分类列表 -->
         <activity android:name="com.example.testactionbar.view.ThemeActivity" >
-              <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,15 +37,29 @@
         </activity>
         <!-- 书籍列表 -->
         <activity android:name="com.example.testactionbar.view.BookListActivity" >
-            
         </activity>
-        <!-- 书籍简介 -->
-        <activity android:name="com.example.testactionbar.view.BookContent" 
-             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <!-- 书籍分类 -->
+        <activity android:name="com.example.testactionbar.view.BookListByTypeActivity" >
+        </activity>
+        <!-- 书籍排行 -->
+        <activity android:name="com.example.testactionbar.view.BookListByRankActivity" >
+        </activity>
+        <!-- 书籍搜索 -->
+        <activity android:name="com.example.testactionbar.view.BookListBySearchActivity" >
+        </activity>
+        <!-- 书籍搜索 -->
+        <activity android:name="com.example.testactionbar.view.BookIntroduceActivity" >
+        </activity>
+        <!-- 章节列表 -->
+        <activity android:name="com.example.testactionbar.view.BookChapterListActivity" >
+        </activity>
+        <!-- 章节内容 -->
+        <activity
+            android:name="com.example.testactionbar.view.ChapterContentActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <!-- 测试 -->
-        <activity android:name="com.example.testactionbar.view.Test" 
-           >
+        <activity android:name="com.example.testactionbar.view.Test" >
         </activity>
     </application>
 

@@ -1,6 +1,6 @@
 package com.example.testactionbar.view;
 
-public class BookListByRankActivity
+public class BookListByRankActivity extends BookListActivity
 {
 
 }

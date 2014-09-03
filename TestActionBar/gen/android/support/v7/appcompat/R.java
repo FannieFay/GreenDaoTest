@@ -256,26 +256,26 @@ public final class R {
 		public static final int btn_cab_done_pressed_home = 0x7f020060;
 		public static final int cab_background_bottom_home = 0x7f020061;
 		public static final int cab_background_top_home = 0x7f020062;
-		public static final int list_focused_home = 0x7f02006b;
-		public static final int list_pressed_home = 0x7f02006c;
-		public static final int menu_dropdown_panel_home = 0x7f02006d;
-		public static final int progress_bg_home = 0x7f02006f;
-		public static final int progress_horizontal_home = 0x7f020070;
-		public static final int progress_primary_home = 0x7f020071;
-		public static final int progress_secondary_home = 0x7f020072;
-		public static final int selectable_background_home = 0x7f020073;
-		public static final int spinner_ab_default_home = 0x7f020074;
-		public static final int spinner_ab_disabled_home = 0x7f020075;
-		public static final int spinner_ab_focused_home = 0x7f020076;
-		public static final int spinner_ab_pressed_home = 0x7f020077;
-		public static final int spinner_background_ab_home = 0x7f020078;
-		public static final int tab_indicator_ab_home = 0x7f020079;
-		public static final int tab_selected_focused_home = 0x7f02007a;
-		public static final int tab_selected_home = 0x7f02007b;
-		public static final int tab_selected_pressed_home = 0x7f02007c;
-		public static final int tab_unselected_focused_home = 0x7f02007d;
-		public static final int tab_unselected_home = 0x7f02007e;
-		public static final int tab_unselected_pressed_home = 0x7f02007f;
+		public static final int list_focused_home = 0x7f02006c;
+		public static final int list_pressed_home = 0x7f02006d;
+		public static final int menu_dropdown_panel_home = 0x7f02006e;
+		public static final int progress_bg_home = 0x7f020070;
+		public static final int progress_horizontal_home = 0x7f020071;
+		public static final int progress_primary_home = 0x7f020072;
+		public static final int progress_secondary_home = 0x7f020073;
+		public static final int selectable_background_home = 0x7f020074;
+		public static final int spinner_ab_default_home = 0x7f020075;
+		public static final int spinner_ab_disabled_home = 0x7f020076;
+		public static final int spinner_ab_focused_home = 0x7f020077;
+		public static final int spinner_ab_pressed_home = 0x7f020078;
+		public static final int spinner_background_ab_home = 0x7f020079;
+		public static final int tab_indicator_ab_home = 0x7f02007a;
+		public static final int tab_selected_focused_home = 0x7f02007b;
+		public static final int tab_selected_home = 0x7f02007c;
+		public static final int tab_selected_pressed_home = 0x7f02007d;
+		public static final int tab_unselected_focused_home = 0x7f02007e;
+		public static final int tab_unselected_home = 0x7f02007f;
+		public static final int tab_unselected_pressed_home = 0x7f020080;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f05002b;
@@ -366,7 +366,7 @@ public final class R {
 		public static final int abc_popup_menu_item_layout = 0x7f030014;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030027;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03002a;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f080007;

@@ -1,6 +1,15 @@
 package com.example.testactionbar.presenter.modle;
 
-public class Chapter
+import java.io.Serializable;
+import java.util.List;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
+import org.jsoup.select.Elements;
+
+public class Chapter implements Serializable
 {
     private String url;
     private String name;
@@ -23,5 +32,30 @@ public class Chapter
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public static String getChapterContent(Document doc)
+    {
+        Elements elements = doc.select("span[id=contentbox]");
+
+        Element element = elements.get(0);
+        List<Node> list_note = element.childNodes();
+        int size = list_note.size();
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < size; i++)
+        {
+            Object object = list_note.get(i);
+            if (object instanceof TextNode)
+            {
+                if (!stringBuffer.toString().contains("永久网址")
+                        && !stringBuffer.toString().contains("~~"))
+                {
+                    stringBuffer.append(object.toString() + "\n");
+                }
+
+            }
+        }
+
+        return stringBuffer.toString().replace("&nbsp;", "  ");
     }
 }

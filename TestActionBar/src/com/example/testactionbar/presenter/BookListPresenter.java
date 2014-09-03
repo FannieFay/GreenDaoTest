@@ -1,7 +1,6 @@
 package com.example.testactionbar.presenter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,6 +9,7 @@ import android.content.Context;
 
 import com.example.testactionbar.IBookListView;
 import com.example.testactionbar.presenter.modle.BookInfo;
+import com.example.testactionbar.presenter.modle.BookInfoExpand;
 
 public class BookListPresenter
 {
@@ -39,7 +39,7 @@ public class BookListPresenter
      * @param url
      * @throws
      */
-    public void getBookListByType(final String url)
+    public void getBookListByType(final String url, final boolean isMore)
     {
         Thread thread = new Thread(new Runnable()
         {
@@ -51,11 +51,19 @@ public class BookListPresenter
                 try
                 {
                     doc = Jsoup.connect(url).get();
-                    ArrayList<BookInfo> arrayList = BookInfo.getBookInfoByType(doc);
-                    mView.getBookListByTypeSuccess(arrayList);
+                    BookInfoExpand bookInfoExpand = BookInfo.getBookInfoByType(doc);
+                    if (isMore)
+                    {
+                        mView.getMoreBookListSuccess(bookInfoExpand);
+                    }
+                    else
+                    {
+                        mView.getBookListSuccess(bookInfoExpand);
+                    }
+
                 } catch (IOException e)
                 {
-                    mView.getBookListByTypeFailure();
+                    mView.getBookListFailure();
                     e.printStackTrace();
                 }
             }

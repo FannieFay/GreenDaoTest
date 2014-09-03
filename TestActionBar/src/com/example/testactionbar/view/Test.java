@@ -114,7 +114,7 @@ public class Test extends Activity
                     stringBuffer.append("\n");
                 }
                 ArrayList<String> aList = bookPageFactory.getArrayList(stringBuffer.toString());
-                Intent intent = new Intent(Test.this, BookContent.class);
+                Intent intent = new Intent(Test.this, ChapterContentActivity.class);
                 intent.putExtra(IntentKey.INTENT_LIST_KEY, aList);
                 startActivity(intent);
             }

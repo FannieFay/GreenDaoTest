@@ -95,7 +95,10 @@ public class BookPageFactory
      */
     public ArrayList<String> getArrayList(String string)
     {
-        Log.e("string", string.length() + "");
+        if (string == null)
+        {
+            return null;
+        }
         String currentString = string;
         String strParagraph = "";
         ArrayList<String> mVectorStrings = new ArrayList<String>();

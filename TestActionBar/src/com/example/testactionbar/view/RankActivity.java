@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.Constans.RankName;
 import com.example.testactionbar.common.Constans.RankUrl;
+import com.example.testactionbar.common.IntentKey;
 
 public class RankActivity extends Activity
 {
@@ -38,45 +39,45 @@ public class RankActivity extends Activity
             switch (i)
             {
 
-            case 0:
-                typeName = RankName.total;
-                typeUrl = RankUrl.total;
-                break;
-            case 1:
-                typeName = RankName.xunhuan;
-                typeUrl = RankUrl.xunhuan;
-                break;
-            case 2:
-                typeName = RankName.yanqing;
-                typeUrl = RankUrl.yanqing;
-                break;
-            case 3:
-                typeName = RankName.xianxia;
-                typeUrl = RankUrl.xianxia;
-                break;
-            case 4:
-                typeName = RankName.lishi;
-                typeUrl = RankUrl.lishi;
-                break;
-            case 5:
-                typeName = RankName.wangyou;
-                typeUrl = RankUrl.wangyou;
-                break;
-            case 6:
-                typeName = RankName.lingyi;
-                typeUrl = RankUrl.lingyi;
-                break;
-            case 7:
-                typeName = RankName.tongren;
-                typeUrl = RankUrl.tongren;
-                break;
-            case 8:
-                typeName = RankName.quanben;
-                typeUrl = RankUrl.quanben;
-                break;
+                case 0:
+                    typeName = RankName.total;
+                    typeUrl = RankUrl.total;
+                    break;
+                case 1:
+                    typeName = RankName.xunhuan;
+                    typeUrl = RankUrl.xunhuan;
+                    break;
+                case 2:
+                    typeName = RankName.yanqing;
+                    typeUrl = RankUrl.yanqing;
+                    break;
+                case 3:
+                    typeName = RankName.xianxia;
+                    typeUrl = RankUrl.xianxia;
+                    break;
+                case 4:
+                    typeName = RankName.lishi;
+                    typeUrl = RankUrl.lishi;
+                    break;
+                case 5:
+                    typeName = RankName.wangyou;
+                    typeUrl = RankUrl.wangyou;
+                    break;
+                case 6:
+                    typeName = RankName.lingyi;
+                    typeUrl = RankUrl.lingyi;
+                    break;
+                case 7:
+                    typeName = RankName.tongren;
+                    typeUrl = RankUrl.tongren;
+                    break;
+                case 8:
+                    typeName = RankName.quanben;
+                    typeUrl = RankUrl.quanben;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             final String url = typeUrl;
@@ -88,10 +89,8 @@ public class RankActivity extends Activity
                 public void onClick(View v)
                 {
                     Intent intent = new Intent();
-                    intent.setClass(RankActivity.this, BookListActivity.class);
-                    intent.putExtra(BookListActivity.BOOKLISTURL, url);
-                    intent.putExtra(BookListActivity.BOOKLIST_TYPE,
-                            BookListActivity.type_rank);
+                    intent.setClass(RankActivity.this, BookListByRankActivity.class);
+                    intent.putExtra(IntentKey.INTENT_URL_KEY, url);
                     startActivity(intent);
                 }
             });
