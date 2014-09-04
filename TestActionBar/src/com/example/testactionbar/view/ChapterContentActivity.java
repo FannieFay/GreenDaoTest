@@ -128,17 +128,17 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
             // mListFragment.add(fragment);
         }
 
-        if (mAdapter == null)
-        {
-            mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mList,
-                    aStartAndEnds);
-            mViewPager.setAdapter(mAdapter);
-        }
-        else
-        {
-            mAdapter.setList(mListFragment);
-        }
-        maxPageNum = mListFragment.size();
+        // if (mAdapter == null)
+        // {
+        mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mList, aStartAndEnds);
+        mViewPager.setAdapter(mAdapter);
+        // }
+        // else
+        // {
+        // mAdapter.setList(mList, aStartAndEnds);
+        // }
+        maxPageNum = aStartAndEnds.size();
+        mViewPager.setCurrentItem(0);
 
         mTvchapterContent.setText(chapters.get(position).getName() + "     " + (pagePosition + 1)
                 + "/" + maxPageNum);
@@ -164,7 +164,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
     public boolean onTouch(View v, MotionEvent event)
     {
 
-        if (pagePosition == mListFragment.size() - 1)
+        if (pagePosition == aStartAndEnds.size() - 1)
         {
             // 获取当前坐标
             float x = event.getX();

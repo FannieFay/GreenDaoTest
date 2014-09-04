@@ -15,4 +15,6 @@ public interface IntentKey
     public final String INTENT_CHAPTER_KEY = "intent_chapter_key";
 
     public final String INTENT_POSITION_KEY = "intent_position_key";
+
+    public final String INTENT_START_END_KEY = "intent_start_end_key";
 }

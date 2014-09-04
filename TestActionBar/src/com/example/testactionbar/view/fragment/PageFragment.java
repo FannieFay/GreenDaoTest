@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.presenter.modle.StartAndEnd;
 import com.example.testactionbar.widget.PageView;
 
 public class PageFragment extends Fragment
@@ -18,6 +19,7 @@ public class PageFragment extends Fragment
     LinearLayout linear;
     View rootView;
     public static final String INTENT_PAGE_KEY = "intent_page_key";
+    StartAndEnd startAndEnd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -42,10 +44,16 @@ public class PageFragment extends Fragment
         Bundle bundle = getArguments();
         ArrayList<String> arrayList = (ArrayList<String>) bundle
                 .getStringArrayList(IntentKey.INTENT_LIST_KEY);
-        int start = bundle.getInt(IntentKey.INTENT_START_KEY);
-        int end = bundle.getInt(IntentKey.INTENT_END_KEY);
-        PageView pageView = new PageView(getActivity(), arrayList, start, end);
+
+        startAndEnd = (StartAndEnd) bundle.getSerializable(IntentKey.INTENT_START_END_KEY);
+        PageView pageView = new PageView(getActivity(), arrayList, startAndEnd.getStart(),
+                startAndEnd.getEnd());
         linear.addView(pageView);
+    }
+
+    public StartAndEnd getStartAndEnd()
+    {
+        return startAndEnd;
     }
 
 }

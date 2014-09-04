@@ -1,6 +1,8 @@
 package com.example.testactionbar.presenter.modle;
 
-public class StartAndEnd
+import java.io.Serializable;
+
+public class StartAndEnd implements Serializable
 {
     int start;
     int end;
