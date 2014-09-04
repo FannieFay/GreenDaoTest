@@ -2,7 +2,7 @@ package com.example.testactionbar.common;
 
 public class Constans
 {
-    public static final String url = "http://www.uukanshu.com/";
+    public static final String url = "http://www.uukanshu.com";
 
     public class BookTypeUrl
     {

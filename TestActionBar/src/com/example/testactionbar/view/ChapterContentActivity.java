@@ -1,12 +1,8 @@
 package com.example.testactionbar.view;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -15,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.TextView;
 
 import com.example.testactionbar.IChapterContentView;
 import com.example.testactionbar.R;
@@ -22,21 +19,26 @@ import com.example.testactionbar.adapter.ViewPageFragmentAdapter;
 import com.example.testactionbar.common.IntentKey;
 import com.example.testactionbar.presenter.ChapterContentPresenter;
 import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.presenter.modle.StartAndEnd;
 import com.example.testactionbar.util.BookPageConfiguration;
 import com.example.testactionbar.util.BookPageFactory;
-import com.example.testactionbar.view.fragment.PageFragment;
 
 public class ChapterContentActivity extends FragmentActivity implements IChapterContentView,
         OnTouchListener, OnPageChangeListener
 {
     ViewPager mViewPager;
+    TextView mTvchapterContent;
+
     ArrayList<String> mList;
-    List<Fragment> mListFragment;
+    // List<Fragment> mListFragment;
     View loadingView;
+
+    ArrayList<StartAndEnd> aStartAndEnds;
 
     ArrayList<Chapter> chapters;
     int position;
     int pagePosition;
+    int maxPageNum;
     ChapterContentPresenter mPresenter;
     BookPageFactory bookPageFactory;
 
@@ -68,11 +70,13 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
                 IntentKey.INTENT_CHAPTER_LIST_KEY);
         position = getIntent().getIntExtra(IntentKey.INTENT_POSITION_KEY, -1);
 
+        mTvchapterContent = (TextView) findViewById(R.id.chapterContentTv);
+
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
         mViewPager.setOnTouchListener(this);
         mViewPager.setOnPageChangeListener(this);
         loadingView = findViewById(R.id.loading);
-        mListFragment = new ArrayList<Fragment>();
+        aStartAndEnds = new ArrayList<StartAndEnd>();
 
         showLoadingView();
 
@@ -93,7 +97,9 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     private void initList(String string)
     {
-
+        Log.e("string", string);
+        mViewPager.setCurrentItem(0);
+        // mListFragment.clear();
         mList = bookPageFactory.getArrayList(string);
         int size = mList.size() / bookPageFactory.getMaxLine();
         if (mList.size() % bookPageFactory.getMaxLine() != 0)
@@ -108,54 +114,42 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
             {
                 end = mList.size() - 1;
             }
-            Fragment fragment = new PageFragment();
-            Bundle bundle = new Bundle();
-            bundle.putStringArrayList(IntentKey.INTENT_LIST_KEY, mList);
-            bundle.putInt(IntentKey.INTENT_START_KEY, start);
-            bundle.putInt(IntentKey.INTENT_END_KEY, end);
-            fragment.setArguments(bundle);
-            mListFragment.add(fragment);
+            StartAndEnd startAndEnd = new StartAndEnd();
+            startAndEnd.setStart(start);
+            startAndEnd.setEnd(end);
+            aStartAndEnds.add(startAndEnd);
+
+            // Fragment fragment = new PageFragment();
+            // Bundle bundle = new Bundle();
+            // bundle.putStringArrayList(IntentKey.INTENT_LIST_KEY, mList);
+            // bundle.putInt(IntentKey.INTENT_START_KEY, start);
+            // bundle.putInt(IntentKey.INTENT_END_KEY, end);
+            // fragment.setArguments(bundle);
+            // mListFragment.add(fragment);
         }
 
         if (mAdapter == null)
         {
-            mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mListFragment);
+            mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mList,
+                    aStartAndEnds);
             mViewPager.setAdapter(mAdapter);
         }
         else
         {
             mAdapter.setList(mListFragment);
         }
+        maxPageNum = mListFragment.size();
 
+        mTvchapterContent.setText(chapters.get(position).getName() + "     " + (pagePosition + 1)
+                + "/" + maxPageNum);
+        mViewPager.invalidate();
     }
-
-    Handler mHandler = new Handler()
-    {
-        public void handleMessage(android.os.Message msg)
-        {
-            switch (msg.what)
-            {
-                case 1:
-                    String string = (String) msg.obj;
-                    initList(string);
-                    showContentView();
-                    break;
-                case 2:
-
-                    break;
-                default:
-                    break;
-            }
-        };
-    };
 
     @Override
     public void getChapterContentSuccess(String string)
     {
-        Message message = new Message();
-        message.what = 1;
-        message.obj = string;
-        mHandler.sendMessage(message);
+        initList(string);
+        showContentView();
     }
 
     @Override
@@ -164,14 +158,49 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     }
 
+    float x_tmp1 = 0, y_tmp1 = 0, x_tmp2, y_tmp2 = 0;
+
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if (event.getAction() == MotionEvent.ACTION_MOVE)
+
+        if (pagePosition == mListFragment.size() - 1)
         {
-            if (pagePosition == mListFragment.size() - 1)
+            // 获取当前坐标
+            float x = event.getX();
+            float y = event.getY();
+
+            switch (event.getAction())
             {
-                Log.e("move", "move");
+                case MotionEvent.ACTION_DOWN:
+                    x_tmp1 = x;
+                    y_tmp1 = y;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    x_tmp2 = x;
+                    y_tmp2 = y;
+                    Log.e("tag", "滑动参值 x1=" + x_tmp1 + "; x2=" + x_tmp2);
+                    if (x_tmp1 != 0 && y_tmp1 != 0)
+                    {
+                        if (x_tmp1 - x_tmp2 > 8)
+                        {
+
+                            if (position >= 1)
+                            {
+                                showLoadingView();
+                                position--;
+                                mTvchapterContent.setText(chapters.get(this.position).getName()
+                                        + "     " + (pagePosition + 1) + "/" + maxPageNum);
+                                mPresenter.getChapterContent(chapters.get(position).getUrl());
+                                Log.i("aaa", "向左滑动");
+                            }
+                        }
+                        if (x_tmp2 - x_tmp1 > 8)
+                        {
+                            Log.i("aaa", "向右滑动");
+                        }
+                    }
+                    break;
             }
         }
         return false;
@@ -193,6 +222,8 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
     public void onPageSelected(int position)
     {
         pagePosition = position;
+        mTvchapterContent.setText(chapters.get(this.position).getName() + "     "
+                + (pagePosition + 1) + "/" + maxPageNum);
     }
 
 }

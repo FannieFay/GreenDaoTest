@@ -1,7 +1,8 @@
 package com.example.testactionbar.presenter;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
+import org.apache.http.Header;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -10,16 +11,20 @@ import android.content.Context;
 import com.example.testactionbar.IBookListView;
 import com.example.testactionbar.presenter.modle.BookInfo;
 import com.example.testactionbar.presenter.modle.BookInfoExpand;
+import com.example.testactionbar.presenter.request.HttpUtils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class BookListPresenter
 {
     IBookListView mView;
     Context mContext;
+    HttpUtils httpUtils;
 
     public BookListPresenter(Context mContext, IBookListView mView)
     {
         this.mContext = mContext;
         this.mView = mView;
+        httpUtils = HttpUtils.getHttpUtils();
     }
 
     /**
@@ -41,16 +46,15 @@ public class BookListPresenter
      */
     public void getBookListByType(final String url, final boolean isMore)
     {
-        Thread thread = new Thread(new Runnable()
+        httpUtils.get(url, new AsyncHttpResponseHandler()
         {
-            // http://www.uukanshu.com/list/tongren-1.html
             @Override
-            public void run()
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
             {
-                Document doc = null;
                 try
                 {
-                    doc = Jsoup.connect(url).get();
+                    String html = new String(responseBody, "gb2312");
+                    Document doc = Jsoup.parse(html);
                     BookInfoExpand bookInfoExpand = BookInfo.getBookInfoByType(doc);
                     if (isMore)
                     {
@@ -60,15 +64,19 @@ public class BookListPresenter
                     {
                         mView.getBookListSuccess(bookInfoExpand);
                     }
-
-                } catch (IOException e)
+                } catch (UnsupportedEncodingException e)
                 {
                     mView.getBookListFailure();
-                    e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
+                    Throwable error)
+            {
+                mView.getBookListFailure();
+            }
         });
-        thread.start();
     }
 
     /**

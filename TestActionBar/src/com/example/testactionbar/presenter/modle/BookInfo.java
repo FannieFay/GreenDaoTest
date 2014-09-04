@@ -8,6 +8,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import com.example.testactionbar.common.Constans;
+
 public class BookInfo implements Serializable
 {
     String bookName;// 书名
@@ -38,7 +40,7 @@ public class BookInfo implements Serializable
         Elements elementsByPages = elementsByPage.select("a[href]");
         int pageSize = elementsByPages.size();
         Element maxElement = elementsByPages.get(pageSize - 1);
-        String maxHref = maxElement.attr("abs:href");
+        String maxHref = Constans.url + maxElement.attr("href");
 
         String string[] = maxHref.split("-");
         int maxIndex = Integer.parseInt(string[1].replace(".html", ""));
@@ -63,8 +65,8 @@ public class BookInfo implements Serializable
         Elements urlElements = lElement.select("a[class=bookImg]");
         if (urlElements.size() != 0)
         {
-            bookInfo.setUrl(urlElements.attr("abs:href"));
-            bookInfo.setImage(urlElements.select("img[onerror]").attr("abs:src"));
+            bookInfo.setUrl(Constans.url + urlElements.attr("href"));
+            bookInfo.setImage(Constans.url + urlElements.select("img[onerror]").attr("src"));
             bookInfo.setBookName(urlElements.select("img[onerror]").attr("alt"));
         }
 
@@ -121,7 +123,7 @@ public class BookInfo implements Serializable
             Chapter chapter = new Chapter();
             Element chapterElement = elementsChapter.get(i);
             String text = chapterElement.text();
-            String url = chapterElement.attr("abs:href");
+            String url = Constans.url + chapterElement.attr("href");
             chapter.setName(text);
             chapter.setUrl(url);
             chapters.add(chapter);

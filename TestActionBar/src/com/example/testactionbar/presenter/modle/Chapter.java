@@ -6,7 +6,6 @@ import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 public class Chapter implements Serializable
@@ -45,15 +44,10 @@ public class Chapter implements Serializable
         for (int i = 0; i < size; i++)
         {
             Object object = list_note.get(i);
-            if (object instanceof TextNode)
-            {
-                if (!stringBuffer.toString().contains("永久网址")
-                        && !stringBuffer.toString().contains("~~"))
-                {
-                    stringBuffer.append(object.toString() + "\n");
-                }
-
-            }
+            object = object.toString().replace("　", "").replace("<br />", "").replace("~~", "")
+                    .trim();
+            if (!object.toString().contains("永久网址") && object.toString().trim().length() != 0)
+                stringBuffer.append(object.toString().trim() + "\n");
         }
 
         return stringBuffer.toString().replace("&nbsp;", "  ");

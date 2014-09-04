@@ -23,11 +23,11 @@
         </activity>
         <!-- 分类列表 -->
         <activity android:name="com.example.testactionbar.view.ThemeActivity" >
-            <intent-filter>
+			<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>           
         </activity>
         <!-- 主题书单 -->
         <activity android:name="com.example.testactionbar.view.TypeActivity" >

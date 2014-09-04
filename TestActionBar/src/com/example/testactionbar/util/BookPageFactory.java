@@ -107,7 +107,6 @@ public class BookPageFactory
         while (isHasLines)
         {
             j++;
-            Log.e("j:", String.valueOf(j));
             if (currentString.length() > 0)
             {
                 int nSize = mPaint.breakText(currentString, true, getMaxLineWidth(), null);

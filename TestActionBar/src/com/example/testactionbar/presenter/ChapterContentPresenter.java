@@ -1,7 +1,8 @@
 package com.example.testactionbar.presenter;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
+import org.apache.http.Header;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -10,41 +11,52 @@ import android.util.Log;
 
 import com.example.testactionbar.IChapterContentView;
 import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.presenter.request.HttpUtils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class ChapterContentPresenter
 {
     IChapterContentView mView;
     Context mContext;
 
+    HttpUtils httpUtils;
+
     public ChapterContentPresenter(Context mContext, IChapterContentView mView)
     {
         this.mContext = mContext;
         this.mView = mView;
+        httpUtils = HttpUtils.getHttpUtils();
     }
 
     public void getChapterContent(final String url)
     {
-        Thread thread = new Thread(new Runnable()
+        Log.e("contentUrl", url);
+        httpUtils.get(url, new AsyncHttpResponseHandler()
         {
-            // http://www.uukanshu.com/list/tongren-1.html
             @Override
-            public void run()
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
             {
-                Document doc = null;
+                String html;
                 try
                 {
-                    doc = Jsoup.connect(url).get();
-                    Log.e("url", url);
+                    html = new String(responseBody, "gb2312");
+                    Document doc = Jsoup.parse(html);
                     String string = Chapter.getChapterContent(doc);
                     mView.getChapterContentSuccess(string);
-
-                } catch (IOException e)
+                } catch (UnsupportedEncodingException e)
                 {
-                    mView.getChapterContentFailure();
                     e.printStackTrace();
+                    mView.getChapterContentFailure();
                 }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
+                    Throwable error)
+            {
+                mView.getChapterContentFailure();
             }
         });
-        thread.start();
     }
 }

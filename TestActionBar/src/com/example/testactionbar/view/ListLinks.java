@@ -1,8 +1,10 @@
 package com.example.testactionbar.view;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import org.apache.http.Header;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,11 +15,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.testactionbar.common.Constans;
 import com.example.testactionbar.common.Constans.BookTypeUrl;
 import com.example.testactionbar.common.Constans.RankUrl;
+import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.presenter.request.HttpUtils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 /**
  * Example program to list links from a URL.
@@ -32,7 +38,34 @@ public class ListLinks extends Activity
         super.onCreate(savedInstanceState);
         mTextView = new TextView(this);
         setContentView(mTextView);
-        test5();
+        // test5();
+
+        HttpUtils httpUtils = HttpUtils.getHttpUtils();
+        httpUtils.get("http://www.uukanshu.com/b/16792/135980.html", new AsyncHttpResponseHandler()
+        {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
+            {
+                try
+                {
+                    String string = new String(responseBody, "gb2312");
+                    Log.e("success1", string);
+                    Document document = Jsoup.parse(string);
+                    String string1 = Chapter.getChapterContent(document);
+                    Log.e("success2", string1);
+
+                } catch (UnsupportedEncodingException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody,
+                    Throwable error)
+            {
+            }
+        });
     }
 
     public void test1()
