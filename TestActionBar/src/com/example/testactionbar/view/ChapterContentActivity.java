@@ -3,11 +3,14 @@ package com.example.testactionbar.view;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -22,15 +25,17 @@ import com.example.testactionbar.presenter.modle.Chapter;
 import com.example.testactionbar.presenter.modle.StartAndEnd;
 import com.example.testactionbar.util.BookPageConfiguration;
 import com.example.testactionbar.util.BookPageFactory;
+import com.example.testactionbar.util.CalendarUtil;
+import com.example.testactionbar.widget.MenuPopupWindow;
+import com.example.testactionbar.widget.MenuPopupWindow.PopClickListener;
 
 public class ChapterContentActivity extends FragmentActivity implements IChapterContentView,
         OnTouchListener, OnPageChangeListener
 {
     ViewPager mViewPager;
-    TextView mTvchapterContent;
+    TextView mTvchapterContent, mTvTime;
 
     ArrayList<String> mList;
-    // List<Fragment> mListFragment;
     View loadingView;
 
     ArrayList<StartAndEnd> aStartAndEnds;
@@ -44,6 +49,12 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     ViewPageFragmentAdapter mAdapter;
 
+    boolean isTimer = true;
+
+    Thread thread;
+
+    MenuPopupWindow menuWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -54,6 +65,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;// 宽度
         int height = dm.heightPixels;// 高度
+
         /**
          * 初始化数据
          */
@@ -73,6 +85,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         mTvchapterContent = (TextView) findViewById(R.id.chapterContentTv);
 
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);
+        mTvTime = (TextView) findViewById(R.id.chapterContentTime);
         mViewPager.setOnTouchListener(this);
         mViewPager.setOnPageChangeListener(this);
         loadingView = findViewById(R.id.loading);
@@ -80,8 +93,58 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
         showLoadingView();
 
-        mPresenter.getChapterContent(chapters.get(position).getUrl());
+        startThread();
+
+        mTvchapterContent.setText(chapters.get(position).getName());
+
+        mPresenter.getChapterContent(chapters.get(position).getUrl(), true);
+
     }
+
+    public void startThread()
+    {
+        thread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while (isTimer)
+                {
+                    try
+                    {
+                        Thread.sleep(1000);
+                        String time = CalendarUtil
+                                .getCurrentDateFormat(CalendarUtil.FORMAT_MM_DD_HH_MM);
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = time;
+                        mHandler.sendMessage(message);
+                    } catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+
+    Handler mHandler = new Handler()
+    {
+        public void handleMessage(android.os.Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+                    String time = (String) msg.obj;
+                    mTvTime.setText(time);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+    };
 
     private void showLoadingView()
     {
@@ -95,11 +158,14 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         mViewPager.setVisibility(View.VISIBLE);
     }
 
-    private void initList(String string)
+    private void initList(String string, boolean isStart)
     {
-        Log.e("string", string);
-        mViewPager.setCurrentItem(0);
-        // mListFragment.clear();
+        aStartAndEnds.clear();
+
+        if (mList != null)
+        {
+            mList.clear();
+        }
         mList = bookPageFactory.getArrayList(string);
         int size = mList.size() / bookPageFactory.getMaxLine();
         if (mList.size() % bookPageFactory.getMaxLine() != 0)
@@ -118,38 +184,48 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
             startAndEnd.setStart(start);
             startAndEnd.setEnd(end);
             aStartAndEnds.add(startAndEnd);
-
-            // Fragment fragment = new PageFragment();
-            // Bundle bundle = new Bundle();
-            // bundle.putStringArrayList(IntentKey.INTENT_LIST_KEY, mList);
-            // bundle.putInt(IntentKey.INTENT_START_KEY, start);
-            // bundle.putInt(IntentKey.INTENT_END_KEY, end);
-            // fragment.setArguments(bundle);
-            // mListFragment.add(fragment);
         }
-
-        // if (mAdapter == null)
-        // {
-        mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mList, aStartAndEnds);
-        mViewPager.setAdapter(mAdapter);
-        // }
-        // else
-        // {
-        // mAdapter.setList(mList, aStartAndEnds);
-        // }
         maxPageNum = aStartAndEnds.size();
-        mViewPager.setCurrentItem(0);
 
+        if (mAdapter == null)
+        {
+            mAdapter = new ViewPageFragmentAdapter(getSupportFragmentManager(), mList,
+                    aStartAndEnds);
+            mViewPager.setAdapter(mAdapter);
+        }
+        else
+        {
+            mAdapter.setList(mList, aStartAndEnds);
+        }
         mTvchapterContent.setText(chapters.get(position).getName() + "     " + (pagePosition + 1)
                 + "/" + maxPageNum);
         mViewPager.invalidate();
+
+        if (!isStart)
+        {
+            mViewPager.setCurrentItem(maxPageNum - 1);
+
+        }
+        else
+        {
+            mViewPager.setCurrentItem(0);
+        }
+        new Handler().postDelayed(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                showContentView();
+            }
+        }, 500);
+
     }
 
     @Override
-    public void getChapterContentSuccess(String string)
+    public void getChapterContentSuccess(String string, boolean isStart)
     {
-        initList(string);
-        showContentView();
+        initList(string, isStart);
     }
 
     @Override
@@ -159,45 +235,132 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
     }
 
     float x_tmp1 = 0, y_tmp1 = 0, x_tmp2, y_tmp2 = 0;
+    boolean isMove = false;
 
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        // 获取当前坐标
+        float x = event.getX();
+        float y = event.getY();
+        switch (event.getAction())
+        {
+
+            case MotionEvent.ACTION_DOWN:
+                x_tmp1 = x;
+                y_tmp1 = y;
+                break;
+            case MotionEvent.ACTION_UP:
+                x_tmp2 = x;
+                y_tmp2 = y;
+                if (x_tmp1 != 0 && y_tmp1 != 0)
+                {
+                    Log.e("Math.abs(x_tmp1 - x_tmp2)", Math.abs(x_tmp1 - x_tmp2) + "");
+                    if (Math.abs(x_tmp1 - x_tmp2) <= 5)
+                    {
+                        if (menuWindow == null)
+                        {
+                            menuWindow = new MenuPopupWindow(ChapterContentActivity.this,
+                                    new PopClickListener()
+                                    {
+                                        @Override
+                                        public void onClickListener(View view)
+                                        {
+                                            if (view.getId() == R.id.pop_content)
+                                            {
+                                                finish();
+                                            }
+                                        }
+                                    });
+                        }
+                        if (!menuWindow.isShowing())
+                        {
+                            // 显示窗口
+                            menuWindow.showAtLocation(
+                                    ChapterContentActivity.this.findViewById(R.id.main),
+                                    Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); // 设置layout在PopupWindow中显示的位置
+                        }
+                    }
+                }
+                break;
+        }
 
         if (pagePosition == aStartAndEnds.size() - 1)
         {
             // 获取当前坐标
-            float x = event.getX();
-            float y = event.getY();
+            float x1 = event.getX();
+            float y1 = event.getY();
 
             switch (event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
-                    x_tmp1 = x;
-                    y_tmp1 = y;
+                    x_tmp1 = x1;
+                    y_tmp1 = y1;
                     break;
                 case MotionEvent.ACTION_UP:
-                    x_tmp2 = x;
-                    y_tmp2 = y;
-                    Log.e("tag", "滑动参值 x1=" + x_tmp1 + "; x2=" + x_tmp2);
+                    x_tmp2 = x1;
+                    y_tmp2 = y1;
                     if (x_tmp1 != 0 && y_tmp1 != 0)
                     {
-                        if (x_tmp1 - x_tmp2 > 8)
+                        if (x_tmp1 - x_tmp2 > 30)
                         {
 
                             if (position >= 1)
                             {
                                 showLoadingView();
                                 position--;
-                                mTvchapterContent.setText(chapters.get(this.position).getName()
-                                        + "     " + (pagePosition + 1) + "/" + maxPageNum);
-                                mPresenter.getChapterContent(chapters.get(position).getUrl());
-                                Log.i("aaa", "向左滑动");
+                                mTvchapterContent.setText(chapters.get(this.position).getName());
+                                mPresenter.getChapterContent(chapters.get(position).getUrl(), true);
                             }
                         }
-                        if (x_tmp2 - x_tmp1 > 8)
+
+                        if (pagePosition == 0)
                         {
-                            Log.i("aaa", "向右滑动");
+                            if (x_tmp2 - x_tmp1 > 30)
+                            {
+                                if (position <= chapters.size() - 2)
+                                {
+                                    showLoadingView();
+                                    position++;
+                                    mTvchapterContent
+                                            .setText(chapters.get(this.position).getName());
+                                    mPresenter.getChapterContent(chapters.get(position).getUrl(),
+                                            false);
+                                }
+                            }
+                        }
+
+                    }
+                    break;
+            }
+        }
+        else if (pagePosition == 0)
+        {
+            // 获取当前坐标
+            float x1 = event.getX();
+            float y1 = event.getY();
+
+            switch (event.getAction())
+            {
+                case MotionEvent.ACTION_DOWN:
+                    x_tmp1 = x1;
+                    y_tmp1 = y1;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    x_tmp2 = x1;
+                    y_tmp2 = y1;
+                    if (x_tmp1 != 0 && y_tmp1 != 0)
+                    {
+                        if (x_tmp2 - x_tmp1 > 30)
+                        {
+                            if (position <= chapters.size() - 2)
+                            {
+                                showLoadingView();
+                                position++;
+                                mTvchapterContent.setText(chapters.get(this.position).getName());
+                                mPresenter
+                                        .getChapterContent(chapters.get(position).getUrl(), false);
+                            }
                         }
                     }
                     break;
@@ -224,6 +387,13 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         pagePosition = position;
         mTvchapterContent.setText(chapters.get(this.position).getName() + "     "
                 + (pagePosition + 1) + "/" + maxPageNum);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        isTimer = false;
     }
 
 }

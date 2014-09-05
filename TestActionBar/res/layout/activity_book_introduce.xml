@@ -16,9 +16,17 @@
         />
     
     <Button
-        android:id="@+id/bookIntroduceBtn"
+        android:id="@+id/bookIntroduceAddBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/introduce_add_to_shelf"
+        />
+    
+    <Button
+        android:id="@+id/bookIntroduceReadBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/introduce_read"
         />
 
 </LinearLayout>

@@ -9,8 +9,12 @@
     <dimen name="word_size">16dp</dimen>
     <!-- 行间距 -->
     <dimen name="line_spacing">3dp</dimen>
-    <!-- 距离top-->
+    <!-- 距离top -->
     <dimen name="marginTop">25dp</dimen>
     
     <dimen name="book_list_size">15sp</dimen>
+    
+    <dimen name="chpater_list_textmargin">5dp</dimen>
+    <dimen name="chpater_list_position_width">40dp</dimen>
+
 </resources>

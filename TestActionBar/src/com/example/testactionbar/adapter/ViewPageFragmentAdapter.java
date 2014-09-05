@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.testactionbar.common.IntentKey;
 import com.example.testactionbar.presenter.modle.StartAndEnd;
 import com.example.testactionbar.view.fragment.PageFragment;
 
-public class ViewPageFragmentAdapter extends FragmentPagerAdapter
+public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter
 {
     private ArrayList<String> mList;
     private ArrayList<StartAndEnd> aStartAndEnds;

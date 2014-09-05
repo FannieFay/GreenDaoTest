@@ -26,7 +26,7 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
     private String url;
     private BookInfo bookInfo;
     private View loadingView;
-    private Button bookIntroduceBtn;
+    private Button btnRead, btnAddToShelf;
     private ArrayList<Chapter> arrayChapters;
 
     @Override
@@ -37,7 +37,8 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
 
         mPresenter = new BookIntroducePresenter(this, this);
         mTVBookIntroduce = (TextView) findViewById(R.id.bookIntroduceTv);
-        bookIntroduceBtn = (Button) findViewById(R.id.bookIntroduceBtn);
+        btnRead = (Button) findViewById(R.id.bookIntroduceReadBtn);
+        btnAddToShelf = (Button) findViewById(R.id.bookIntroduceAddBtn);
         loadingView = findViewById(R.id.loading);
 
         bookInfo = (BookInfo) getIntent().getSerializableExtra(IntentKey.INTENT_BOOKINFO_KEY);
@@ -45,7 +46,7 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
         showLoadingView();
         mPresenter.getBookInfoDetail(url, bookInfo);
 
-        bookIntroduceBtn.setOnClickListener(new OnClickListener()
+        btnRead.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -56,6 +57,16 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
                 startActivity(intent);
             }
         });
+
+        btnAddToShelf.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
+
     }
 
     @Override

@@ -62,7 +62,10 @@ public class ChapterListAapter extends BaseAdapter
             mViewHolder = new ViewHolder();
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.adapter_chapter_list, null);
-            mViewHolder.mTextName = (TextView) convertView.findViewById(R.id.adapter_chapter_tv);
+            mViewHolder.mTextName = (TextView) convertView
+                    .findViewById(R.id.adapter_chapter_name_tv);
+            mViewHolder.mTextPosition = (TextView) convertView
+                    .findViewById(R.id.adapter_chapter_position_tv);
             convertView.setTag(mViewHolder);
         }
         else
@@ -71,11 +74,13 @@ public class ChapterListAapter extends BaseAdapter
         }
 
         mViewHolder.mTextName.setText(chapter.getName());
+        mViewHolder.mTextPosition.setText(String.valueOf(aChapters.size() - position));
         return convertView;
     }
 
     class ViewHolder
     {
         TextView mTextName;
+        TextView mTextPosition;
     }
 }

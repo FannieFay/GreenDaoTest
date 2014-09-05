@@ -12,5 +12,8 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_rank_list">RankListActivity</string>
     <string name="title_activity_book_list">BookListActivity</string>
+    
+    <string name="introduce_add_to_shelf">加入书架</string>
+    <string name="introduce_read">阅读</string>
 
 </resources>

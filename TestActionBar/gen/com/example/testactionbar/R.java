@@ -15,10 +15,12 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
-        public static final int slide_in_from_bottom=0x7f040006;
-        public static final int slide_in_from_top=0x7f040007;
-        public static final int slide_out_to_bottom=0x7f040008;
-        public static final int slide_out_to_top=0x7f040009;
+        public static final int pop_window_in=0x7f040006;
+        public static final int pop_window_out=0x7f040007;
+        public static final int slide_in_from_bottom=0x7f040008;
+        public static final int slide_in_from_top=0x7f040009;
+        public static final int slide_out_to_bottom=0x7f04000a;
+        public static final int slide_out_to_top=0x7f04000b;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1075,8 +1077,10 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f07001c;
+        public static final int activity_horizontal_margin=0x7f07001e;
         public static final int book_list_size=0x7f07001b;
+        public static final int chpater_list_position_width=0x7f07001d;
+        public static final int chpater_list_textmargin=0x7f07001c;
         public static final int header_footer_left_right_padding=0x7f070003;
         public static final int header_footer_top_bottom_padding=0x7f070004;
         public static final int indicator_corner_radius=0x7f070001;
@@ -1085,7 +1089,7 @@ containing a value of this type.
         /**  行间距 
          */
         public static final int line_spacing=0x7f070019;
-        /**  距离top
+        /**  距离top 
          */
         public static final int marginTop=0x7f07001a;
         /**  Default screen margins, per the Android Design guidelines. 
@@ -1239,26 +1243,29 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050032;
         public static final int action_bar_title=0x7f050031;
         public static final int action_context_bar=0x7f05002c;
-        public static final int action_delete=0x7f05006a;
+        public static final int action_delete=0x7f05006f;
         public static final int action_menu_divider=0x7f050022;
         public static final int action_menu_presenter=0x7f050023;
         public static final int action_mode_close_button=0x7f050033;
-        public static final int action_search=0x7f05006b;
-        public static final int action_settings=0x7f05006c;
-        public static final int action_sure=0x7f050069;
+        public static final int action_search=0x7f050070;
+        public static final int action_settings=0x7f050071;
+        public static final int action_sure=0x7f05006e;
         public static final int activity_chooser_view_content=0x7f050034;
-        public static final int adapterBookListBookName=0x7f05005a;
-        public static final int adapterBookListImage=0x7f050059;
-        public static final int adapterBookListNewChapter=0x7f05005b;
-        public static final int adapterImage=0x7f05005d;
-        public static final int adapter_chapter_tv=0x7f05005c;
+        public static final int adapterBookListBookName=0x7f05005d;
+        public static final int adapterBookListImage=0x7f05005c;
+        public static final int adapterBookListNewChapter=0x7f05005e;
+        public static final int adapterImage=0x7f050061;
+        public static final int adapter_chapter_name_tv=0x7f050060;
+        public static final int adapter_chapter_position_tv=0x7f05005f;
         public static final int always=0x7f050017;
         public static final int beginning=0x7f05001d;
-        public static final int bookIntroduceBtn=0x7f05004e;
+        public static final int bookIntroduceAddBtn=0x7f05004e;
+        public static final int bookIntroduceReadBtn=0x7f05004f;
         public static final int bookIntroduceTv=0x7f05004c;
-        public static final int booklistListView=0x7f05004f;
+        public static final int booklistListView=0x7f050050;
         public static final int both=0x7f050003;
-        public static final int chapterContentTv=0x7f050050;
+        public static final int chapterContentTime=0x7f050052;
+        public static final int chapterContentTv=0x7f050053;
         public static final int chapter_list=0x7f05004b;
         public static final int checkbox=0x7f05003c;
         public static final int collapseActionView=0x7f050019;
@@ -1268,11 +1275,11 @@ containing a value of this type.
         public static final int disabled=0x7f050000;
         public static final int dropdown=0x7f05001b;
         public static final int edit_query=0x7f05003f;
-        public static final int emptyView=0x7f050063;
+        public static final int emptyView=0x7f050068;
         public static final int end=0x7f05001f;
         public static final int expand_activities_button=0x7f050035;
         public static final int expanded_menu=0x7f05003b;
-        public static final int fl_inner=0x7f050064;
+        public static final int fl_inner=0x7f050069;
         public static final int flip=0x7f050008;
         public static final int gridview=0x7f050009;
         public static final int home=0x7f050020;
@@ -1280,37 +1287,39 @@ containing a value of this type.
         public static final int icon=0x7f050039;
         public static final int ifRoom=0x7f050016;
         public static final int image=0x7f050036;
-        public static final int linear=0x7f05005e;
-        public static final int linear_rank=0x7f050055;
-        public static final int linear_type=0x7f050058;
-        public static final int list=0x7f050062;
+        public static final int linear=0x7f050062;
+        public static final int linear_rank=0x7f050058;
+        public static final int linear_type=0x7f05005b;
+        public static final int list=0x7f050067;
         public static final int listMode=0x7f05000d;
         public static final int list_item=0x7f050038;
         public static final int loading=0x7f05004d;
-        public static final int mListView=0x7f050053;
-        public static final int mTextView=0x7f050052;
-        public static final int mViewPage=0x7f050054;
-        public static final int mViewPager=0x7f050051;
+        public static final int mListView=0x7f050056;
+        public static final int mTextView=0x7f050055;
+        public static final int mViewPage=0x7f050057;
+        public static final int mViewPager=0x7f050054;
+        public static final int main=0x7f050051;
         public static final int manualOnly=0x7f050004;
-        public static final int menu_settings=0x7f05006d;
+        public static final int menu_settings=0x7f050072;
         public static final int middle=0x7f05001e;
         public static final int monospace=0x7f050028;
         public static final int never=0x7f050015;
         public static final int none=0x7f05001c;
         public static final int normal=0x7f05000c;
+        public static final int pop_content=0x7f050064;
         public static final int progress_circular=0x7f050024;
         public static final int progress_horizontal=0x7f050025;
-        public static final int progress_loading=0x7f05005f;
+        public static final int progress_loading=0x7f050063;
         public static final int pullDownFromTop=0x7f050005;
         public static final int pullFromEnd=0x7f050002;
         public static final int pullFromStart=0x7f050001;
         public static final int pullUpFromBottom=0x7f050006;
-        public static final int pull_to_refresh_image=0x7f050065;
-        public static final int pull_to_refresh_progress=0x7f050066;
-        public static final int pull_to_refresh_sub_text=0x7f050068;
-        public static final int pull_to_refresh_text=0x7f050067;
+        public static final int pull_to_refresh_image=0x7f05006a;
+        public static final int pull_to_refresh_progress=0x7f05006b;
+        public static final int pull_to_refresh_sub_text=0x7f05006d;
+        public static final int pull_to_refresh_text=0x7f05006c;
         public static final int radio=0x7f05003e;
-        public static final int reLoad=0x7f050061;
+        public static final int reLoad=0x7f050066;
         public static final int rotate=0x7f050007;
         public static final int sans=0x7f050026;
         public static final int scrollview=0x7f05000b;
@@ -1333,10 +1342,10 @@ containing a value of this type.
         public static final int submit_area=0x7f050048;
         public static final int tabMode=0x7f05000e;
         public static final int title=0x7f05003a;
-        public static final int toRankActivity=0x7f050056;
-        public static final int toTypeActivity=0x7f050057;
+        public static final int toRankActivity=0x7f050059;
+        public static final int toTypeActivity=0x7f05005a;
         public static final int top_action_bar=0x7f05002f;
-        public static final int tvNoData=0x7f050060;
+        public static final int tvNoData=0x7f050065;
         public static final int up=0x7f050030;
         public static final int useLogo=0x7f05000f;
         public static final int webview=0x7f05000a;
@@ -1406,11 +1415,12 @@ containing a value of this type.
         public static final int adapter_mytestimageloader=0x7f030023;
         public static final int fragment_page=0x7f030024;
         public static final int layout_loading=0x7f030025;
-        public static final int layout_nodata=0x7f030026;
-        public static final int layoyut_pulltorefreshlist_state=0x7f030027;
-        public static final int pull_to_refresh_header_horizontal=0x7f030028;
-        public static final int pull_to_refresh_header_vertical=0x7f030029;
-        public static final int support_simple_spinner_dropdown_item=0x7f03002a;
+        public static final int layout_menu_popwindow=0x7f030026;
+        public static final int layout_nodata=0x7f030027;
+        public static final int layoyut_pulltorefreshlist_state=0x7f030028;
+        public static final int pull_to_refresh_header_horizontal=0x7f030029;
+        public static final int pull_to_refresh_header_vertical=0x7f03002a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002b;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1461,6 +1471,8 @@ containing a value of this type.
         public static final int action_settings=0x7f080014;
         public static final int app_name=0x7f080013;
         public static final int hello_world=0x7f080015;
+        public static final int introduce_add_to_shelf=0x7f08001e;
+        public static final int introduce_read=0x7f08001f;
         public static final int menu_settings=0x7f08001b;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
@@ -1480,9 +1492,11 @@ containing a value of this type.
     }
     public static final class style {
         public static final int ActionBar_Solid_Home=0x7f0b0085;
+        public static final int AnimPop=0x7f0b0086;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
 
 
     
@@ -1490,6 +1504,7 @@ containing a value of this type.
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
 
         
          */

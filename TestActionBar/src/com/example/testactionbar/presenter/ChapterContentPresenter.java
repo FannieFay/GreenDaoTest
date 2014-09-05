@@ -28,7 +28,7 @@ public class ChapterContentPresenter
         httpUtils = HttpUtils.getHttpUtils();
     }
 
-    public void getChapterContent(final String url)
+    public void getChapterContent(final String url, final boolean isStart)
     {
         Log.e("contentUrl", url);
         httpUtils.get(url, new AsyncHttpResponseHandler()
@@ -42,7 +42,7 @@ public class ChapterContentPresenter
                     html = new String(responseBody, "gb2312");
                     Document doc = Jsoup.parse(html);
                     String string = Chapter.getChapterContent(doc);
-                    mView.getChapterContentSuccess(string);
+                    mView.getChapterContentSuccess(string, isStart);
                 } catch (UnsupportedEncodingException e)
                 {
                     e.printStackTrace();

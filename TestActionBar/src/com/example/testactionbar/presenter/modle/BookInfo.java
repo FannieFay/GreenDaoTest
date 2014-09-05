@@ -106,7 +106,10 @@ public class BookInfo implements Serializable
                 {
                     if (!((TextNode) object).text().contains("－－－－"))
                     {
-                        detailIntroduce.append(((TextNode) object).text().trim() + "\n");
+                        detailIntroduce.append(((TextNode) object).text().replace("http://", "")
+                                .replace("www.uukanshu.com", "").replace("Www.uukanshu.com", "")
+                                .replace("Www.uuKanShu.Com", "").trim()
+                                + "\n");
                     }
                 }
             }

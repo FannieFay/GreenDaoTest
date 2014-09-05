@@ -45,11 +45,13 @@ public class Chapter implements Serializable
         {
             Object object = list_note.get(i);
             object = object.toString().replace("　", "").replace("<br />", "").replace("~~", "")
-                    .trim();
+                    .replace("&nbsp;", "").replace("http://", "").replace("www.uukanshu.com", "")
+                    .replace("<p>", "").replace("<p />", "").replace("Www.uukanshu.com", "")
+                    .replace("Www.uuKanShu.Com", "").trim();
             if (!object.toString().contains("永久网址") && object.toString().trim().length() != 0)
-                stringBuffer.append(object.toString().trim() + "\n");
+                stringBuffer.append("　　" + object.toString().trim() + "\n");
         }
 
-        return stringBuffer.toString().replace("&nbsp;", "  ");
+        return stringBuffer.toString();
     }
 }
