@@ -11,9 +11,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.testactionbar.R;
-import com.example.testactionbar.adapter.ChapterListAapter;
 import com.example.testactionbar.common.IntentKey;
-import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.view.adapter.ChapterListAapter;
 
 public class BookChapterListActivity extends FragmentActivity
 {

@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
-import com.example.testactionbar.presenter.modle.StartAndEnd;
+import com.example.testactionbar.modle.StartAndEnd;
 import com.example.testactionbar.widget.PageView;
 
 public class PageFragment extends Fragment

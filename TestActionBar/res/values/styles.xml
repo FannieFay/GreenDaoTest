@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.Base.AppCompat">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -24,6 +24,19 @@
     <style name="AnimPop" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/pop_window_in</item>
         <item name="android:windowExitAnimation">@anim/pop_window_out</item>
+    </style>
+
+    <style name="BaseBtn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_left</item>
+        <item name="android:layout_marginRight">@dimen/margin_right</item>
+        <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="BaseBtn_Theme" parent="@style/BaseBtn">
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
 </resources>

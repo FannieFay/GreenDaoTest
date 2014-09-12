@@ -6,7 +6,7 @@ public class Constans
 
     public class BookTypeUrl
     {
-        public static final String xunhuan = url + "/list/xuanhuan-1.html";
+        public static final String xuanhuan = url + "/list/xuanhuan-1.html";
         public static final String yanqing = url + "/list/yanqing-1.html";
         public static final String xianxia = url + "/list/xianxia-1.html";
         public static final String lishi = url + "/list/lishi-1.html";
@@ -18,7 +18,7 @@ public class Constans
 
     public class BookTypeName
     {
-        public static final String xunhuan = "玄幻奇幻";
+        public static final String xuanhuan = "玄幻奇幻";
         public static final String yanqing = "都市言情";
         public static final String xianxia = "武侠仙侠";
         public static final String lishi = "军事历史";

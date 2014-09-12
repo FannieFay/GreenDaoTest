@@ -1,6 +1,6 @@
 package com.example.testactionbar;
 
-import com.example.testactionbar.presenter.modle.BookInfoExpand;
+import com.example.testactionbar.modle.BookInfoExpand;
 
 public interface IBookListView
 {

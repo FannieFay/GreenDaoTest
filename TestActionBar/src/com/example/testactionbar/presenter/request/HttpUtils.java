@@ -15,7 +15,7 @@ public class HttpUtils
         if (client == null)
         {
             client = new AsyncHttpClient();
-            client.setTimeout(11000); // 设置链接超时，如果不设置，默认为10s
+            client.setTimeout(10000); // 设置链接超时，如果不设置，默认为10s
         }
     }
 

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.testactionbar.adapter.MyTestAdapter;
+import com.example.testactionbar.view.adapter.MyTestAdapter;
 
 public class ImageLoaderTest extends Activity
 {

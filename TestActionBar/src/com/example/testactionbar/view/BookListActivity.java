@@ -14,11 +14,11 @@ import android.widget.ListView;
 
 import com.example.testactionbar.IBookListView;
 import com.example.testactionbar.R;
-import com.example.testactionbar.adapter.BookListAdapter;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.modle.BookInfo;
+import com.example.testactionbar.modle.BookInfoExpand;
 import com.example.testactionbar.presenter.BookListPresenter;
-import com.example.testactionbar.presenter.modle.BookInfo;
-import com.example.testactionbar.presenter.modle.BookInfoExpand;
+import com.example.testactionbar.view.adapter.BookListAdapter;
 import com.example.testactionbar.widget.PullToRefreshListViewState;
 import com.example.testactionbar.widget.PullToRefreshListViewState.RefreshState;
 

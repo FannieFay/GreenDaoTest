@@ -18,14 +18,14 @@ import android.widget.TextView;
 
 import com.example.testactionbar.IChapterContentView;
 import com.example.testactionbar.R;
-import com.example.testactionbar.adapter.ViewPageFragmentAdapter;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.StartAndEnd;
 import com.example.testactionbar.presenter.ChapterContentPresenter;
-import com.example.testactionbar.presenter.modle.Chapter;
-import com.example.testactionbar.presenter.modle.StartAndEnd;
 import com.example.testactionbar.util.BookPageConfiguration;
 import com.example.testactionbar.util.BookPageFactory;
 import com.example.testactionbar.util.CalendarUtil;
+import com.example.testactionbar.view.adapter.ViewPageFragmentAdapter;
 import com.example.testactionbar.widget.MenuPopupWindow;
 import com.example.testactionbar.widget.MenuPopupWindow.PopClickListener;
 

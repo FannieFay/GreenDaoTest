@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.example.testactionbar.common.Constans;
 import com.example.testactionbar.common.Constans.BookTypeUrl;
 import com.example.testactionbar.common.Constans.RankUrl;
-import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.modle.Chapter;
 import com.example.testactionbar.presenter.request.HttpUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 

@@ -15,9 +15,9 @@ import android.widget.TextView;
 import com.example.testactionbar.IBookIntroduceView;
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.modle.BookInfo;
+import com.example.testactionbar.modle.Chapter;
 import com.example.testactionbar.presenter.BookIntroducePresenter;
-import com.example.testactionbar.presenter.modle.BookInfo;
-import com.example.testactionbar.presenter.modle.Chapter;
 
 public class BookIntroduceActivity extends FragmentActivity implements IBookIntroduceView
 {

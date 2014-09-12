@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import android.content.Context;
 
 import com.example.testactionbar.IBookContentView;
-import com.example.testactionbar.presenter.modle.BookInfo;
+import com.example.testactionbar.modle.BookInfo;
 
 public class BookContentPresenter
 {

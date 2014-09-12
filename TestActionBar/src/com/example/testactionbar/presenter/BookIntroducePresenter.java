@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 import android.content.Context;
 
 import com.example.testactionbar.IBookIntroduceView;
-import com.example.testactionbar.presenter.modle.BookInfo;
+import com.example.testactionbar.modle.BookInfo;
 import com.example.testactionbar.presenter.request.HttpUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 

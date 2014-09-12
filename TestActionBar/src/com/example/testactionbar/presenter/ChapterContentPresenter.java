@@ -10,7 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.testactionbar.IChapterContentView;
-import com.example.testactionbar.presenter.modle.Chapter;
+import com.example.testactionbar.modle.Chapter;
 import com.example.testactionbar.presenter.request.HttpUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 

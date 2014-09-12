@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.Constans.BookTypeName;
@@ -15,7 +15,7 @@ import com.example.testactionbar.common.IntentKey;
 
 public class TypeActivity extends Activity
 {
-    LinearLayout linear_type;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,18 +28,16 @@ public class TypeActivity extends Activity
 
     private void initView()
     {
-        linear_type = (LinearLayout) findViewById(R.id.linear_type);
-        String typeName = null;
-        String typeUrl = null;
+        listView = (ListView) findViewById(R.id.listView);
         for (int i = 0; i < 8; i++)
         {
             Button button = new Button(this);
-
+            button.setTextAppearance(this, R.style.BaseBtn_Theme);
             switch (i)
             {
                 case 0:
-                    typeName = BookTypeName.xunhuan;
-                    typeUrl = BookTypeUrl.xunhuan;
+                    typeName = BookTypeName.xuanhuan;
+                    typeUrl = BookTypeUrl.xuanhuan;
                     break;
                 case 1:
                     typeName = BookTypeName.yanqing;
@@ -88,7 +86,6 @@ public class TypeActivity extends Activity
                     startActivity(intent);
                 }
             });
-
         }
     }
 }

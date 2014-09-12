@@ -4,13 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import com.example.testactionbar.adapter.MyViewPagerAdapter;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
+
+import com.example.testactionbar.view.adapter.MyViewPagerAdapter;
 
 public class MyViewPage extends Activity
 {
@@ -49,13 +49,11 @@ public class MyViewPage extends Activity
             {
                 if (i < index)
                 {
-                    str[i] = StringFilter(string.substring(locateLength,
-                            locateLength + perLength));
+                    str[i] = StringFilter(string.substring(locateLength, locateLength + perLength));
                 }
                 else
                 {
-                    str[i] = StringFilter(string.substring(locateLength,
-                            string.length()));
+                    str[i] = StringFilter(string.substring(locateLength, string.length()));
                 }
                 locateLength += perLength;
             }
@@ -66,8 +64,7 @@ public class MyViewPage extends Activity
     // 替换、过滤特殊字符
     public static String StringFilter(String str) throws PatternSyntaxException
     {
-        str = str.replaceAll("【", "[").replaceAll("】", "]")
-                .replaceAll("！", "!");// 替换中文标号
+        str = str.replaceAll("【", "[").replaceAll("】", "]").replaceAll("！", "!");// 替换中文标号
         String regEx = "[『』]"; // 清除掉特殊字符
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);

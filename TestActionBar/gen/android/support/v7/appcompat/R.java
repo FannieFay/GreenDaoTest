@@ -132,7 +132,7 @@ public final class R {
 		public static final int abc_split_action_bar_is_narrow = 0x7f090002;
 	}
 	public static final class color {
-		public static final int abc_search_url_text_holo = 0x7f060005;
+		public static final int abc_search_url_text_holo = 0x7f060009;
 		public static final int abc_search_url_text_normal = 0x7f060001;
 		public static final int abc_search_url_text_pressed = 0x7f060003;
 		public static final int abc_search_url_text_selected = 0x7f060002;
@@ -264,18 +264,18 @@ public final class R {
 		public static final int progress_primary_home = 0x7f020072;
 		public static final int progress_secondary_home = 0x7f020073;
 		public static final int selectable_background_home = 0x7f020074;
-		public static final int spinner_ab_default_home = 0x7f020075;
-		public static final int spinner_ab_disabled_home = 0x7f020076;
-		public static final int spinner_ab_focused_home = 0x7f020077;
-		public static final int spinner_ab_pressed_home = 0x7f020078;
-		public static final int spinner_background_ab_home = 0x7f020079;
-		public static final int tab_indicator_ab_home = 0x7f02007a;
-		public static final int tab_selected_focused_home = 0x7f02007b;
-		public static final int tab_selected_home = 0x7f02007c;
-		public static final int tab_selected_pressed_home = 0x7f02007d;
-		public static final int tab_unselected_focused_home = 0x7f02007e;
-		public static final int tab_unselected_home = 0x7f02007f;
-		public static final int tab_unselected_pressed_home = 0x7f020080;
+		public static final int spinner_ab_default_home = 0x7f020079;
+		public static final int spinner_ab_disabled_home = 0x7f02007a;
+		public static final int spinner_ab_focused_home = 0x7f02007b;
+		public static final int spinner_ab_pressed_home = 0x7f02007c;
+		public static final int spinner_background_ab_home = 0x7f02007d;
+		public static final int tab_indicator_ab_home = 0x7f02007e;
+		public static final int tab_selected_focused_home = 0x7f02007f;
+		public static final int tab_selected_home = 0x7f020080;
+		public static final int tab_selected_pressed_home = 0x7f020081;
+		public static final int tab_unselected_focused_home = 0x7f020082;
+		public static final int tab_unselected_home = 0x7f020083;
+		public static final int tab_unselected_pressed_home = 0x7f020084;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f05002b;

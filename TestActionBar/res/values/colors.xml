@@ -2,4 +2,8 @@
 <resources>
     <color name="pageTextColor">#000000</color>
     
+    <color name="cyan_400">#26c6da</color>
+    <color name="cyan_300">#4dd0e1</color>
+    <color name="cyan_500">#00bcd4</color>
+    <color name="book_background">#E7F4FE</color>
 </resources>

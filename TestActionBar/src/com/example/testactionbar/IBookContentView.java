@@ -1,6 +1,6 @@
 package com.example.testactionbar;
 
-import com.example.testactionbar.presenter.modle.BookInfo;
+import com.example.testactionbar.modle.BookInfo;
 
 public interface IBookContentView
 {
