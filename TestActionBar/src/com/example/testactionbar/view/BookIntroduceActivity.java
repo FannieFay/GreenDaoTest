@@ -18,6 +18,7 @@ import com.example.testactionbar.common.IntentKey;
 import com.example.testactionbar.modle.BookInfo;
 import com.example.testactionbar.modle.Chapter;
 import com.example.testactionbar.presenter.BookIntroducePresenter;
+import com.example.testactionbar.widget.CustomProgressDialog;
 
 public class BookIntroduceActivity extends FragmentActivity implements IBookIntroduceView
 {
@@ -25,9 +26,9 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
     private BookIntroducePresenter mPresenter;
     private String url;
     private BookInfo bookInfo;
-    private View loadingView;
     private Button btnRead, btnAddToShelf;
     private ArrayList<Chapter> arrayChapters;
+    private CustomProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle bundle)
@@ -35,11 +36,11 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
         super.onCreate(bundle);
         setContentView(R.layout.activity_book_introduce);
 
+        mProgressDialog = new CustomProgressDialog(this);
         mPresenter = new BookIntroducePresenter(this, this);
         mTVBookIntroduce = (TextView) findViewById(R.id.bookIntroduceTv);
         btnRead = (Button) findViewById(R.id.bookIntroduceReadBtn);
         btnAddToShelf = (Button) findViewById(R.id.bookIntroduceAddBtn);
-        loadingView = findViewById(R.id.loading);
 
         bookInfo = (BookInfo) getIntent().getSerializableExtra(IntentKey.INTENT_BOOKINFO_KEY);
         url = getIntent().getStringExtra(IntentKey.INTENT_URL_KEY);
@@ -66,7 +67,6 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
 
             }
         });
-
     }
 
     @Override
@@ -81,18 +81,18 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
     @Override
     public void getBookInfoFailure()
     {
-
+        mProgressDialog.dismiss();
     }
 
     private void showLoadingView()
     {
-        loadingView.setVisibility(View.VISIBLE);
+        mProgressDialog.show();
         mTVBookIntroduce.setVisibility(View.GONE);
     }
 
     private void showContentView()
     {
-        loadingView.setVisibility(View.GONE);
+        mProgressDialog.dismiss();
         mTVBookIntroduce.setVisibility(View.VISIBLE);
     }
 
@@ -104,7 +104,7 @@ public class BookIntroduceActivity extends FragmentActivity implements IBookIntr
             {
                 case 1:
                     BookInfo bookInfo = (BookInfo) msg.obj;
-                    mTVBookIntroduce.setText("作者 : " + bookInfo.getAuthor() + "\n" + "书名 :"
+                    mTVBookIntroduce.setText(bookInfo.getAuthor() + "\n" + "书名 :"
                             + bookInfo.getBookName() + "\n" + bookInfo.getDetailIntroduce() + "\n"
                             + "状态 : " + bookInfo.getState() + "\n");
 

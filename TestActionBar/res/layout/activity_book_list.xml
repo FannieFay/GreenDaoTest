@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/book_background"
     tools:context=".BookListActivity" >
 
     <com.example.testactionbar.widget.PullToRefreshListViewState
         android:id="@+id/booklistListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        >
     </com.example.testactionbar.widget.PullToRefreshListViewState>
 
 </RelativeLayout>

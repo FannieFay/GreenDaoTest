@@ -25,7 +25,7 @@ public class PullToRefreshListViewState extends RelativeLayout implements
 
     PullToRefreshListView mPullToRefreshListView;
     ListView mBookListView;
-    View baseView, emptyView, loadingView;
+    View baseView, emptyView;
     Button btnReLoad;
     Handler mHandler = new Handler();
 
@@ -75,6 +75,7 @@ public class PullToRefreshListViewState extends RelativeLayout implements
         baseView = LayoutInflater.from(context).inflate(R.layout.layoyut_pulltorefreshlist_state,
                 this);
         mPullToRefreshListView = (PullToRefreshListView) baseView.findViewById(R.id.list);
+
         emptyView = baseView.findViewById(R.id.emptyView);
         btnReLoad = (Button) baseView.findViewById(R.id.reLoad);
         btnReLoad.setOnClickListener(new OnClickListener()
@@ -86,7 +87,6 @@ public class PullToRefreshListViewState extends RelativeLayout implements
                 statePullToRefreshListener.onStatePullDownToRefresh();
             }
         });
-        loadingView = baseView.findViewById(R.id.loading);
         mPullToRefreshListView.setMode(Mode.BOTH);
         mBookListView = mPullToRefreshListView.getRefreshableView();
         mPullToRefreshListView.setOnRefreshListener(this);
@@ -143,7 +143,6 @@ public class PullToRefreshListViewState extends RelativeLayout implements
         {
             isRefresh = true;
             mPullToRefreshListView.setVisibility(View.GONE);
-            loadingView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
             Delay();
         }
@@ -152,7 +151,6 @@ public class PullToRefreshListViewState extends RelativeLayout implements
         {
             isRefresh = false;
             mPullToRefreshListView.setVisibility(View.GONE);
-            loadingView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
             Delay();
         }
@@ -160,7 +158,6 @@ public class PullToRefreshListViewState extends RelativeLayout implements
         {
             isRefresh = false;
             mPullToRefreshListView.setVisibility(View.VISIBLE);
-            loadingView.setVisibility(View.GONE);
             emptyView.setVisibility(View.GONE);
             Delay();
         }

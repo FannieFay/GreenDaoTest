@@ -2,19 +2,18 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.Base.AppCompat">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
+    <style name="AppBaseTheme" parent="Theme.Base.AppCompat"></style>
 
     <!-- Application theme. -->
     <style name="HomeTheme" parent="AppBaseTheme">
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Home</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="theme_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="ActionBar.Solid.Home" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -28,15 +27,48 @@
 
     <style name="BaseBtn">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
         <item name="android:layout_marginLeft">@dimen/margin_left</item>
         <item name="android:layout_marginRight">@dimen/margin_right</item>
         <item name="android:background">@drawable/selector_btn</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="BaseBtn_Theme" parent="@style/BaseBtn">
         <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="BaseListItem_Simple">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_left</item>
+        <item name="android:layout_marginRight">@dimen/margin_right</item>
+        <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="BaseList_Simple">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:divider">@null</item>
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:dividerHeight">5dp</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="BaseText_Simple">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:lineSpacingExtra">3dp</item>
     </style>
 
 </resources>

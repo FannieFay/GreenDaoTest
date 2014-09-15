@@ -15,7 +15,6 @@ public class ThemeActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
-
     }
 
     public void toTypeActivity(View v)

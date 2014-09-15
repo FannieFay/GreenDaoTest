@@ -7,17 +7,13 @@
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:divider="@color/black_400"
+        android:dividerHeight="1dp" >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
-	
-    <include 
-        android:id="@+id/loading"
-        layout="@layout/layout_loading"
-        />
-    
-    <include 
+
+    <include
         android:id="@+id/emptyView"
-        layout="@layout/layout_nodata"
-        />
-    
+        layout="@layout/layout_nodata" />
+
 </LinearLayout>

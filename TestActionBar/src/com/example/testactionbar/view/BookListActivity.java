@@ -19,6 +19,7 @@ import com.example.testactionbar.modle.BookInfo;
 import com.example.testactionbar.modle.BookInfoExpand;
 import com.example.testactionbar.presenter.BookListPresenter;
 import com.example.testactionbar.view.adapter.BookListAdapter;
+import com.example.testactionbar.widget.CustomProgressDialog;
 import com.example.testactionbar.widget.PullToRefreshListViewState;
 import com.example.testactionbar.widget.PullToRefreshListViewState.RefreshState;
 
@@ -33,6 +34,8 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
     BookListAdapter mBookListAdapter;
     int maxIndex;
 
+    CustomProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,11 +47,14 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
 
     private void initView()
     {
+        mProgressDialog = new CustomProgressDialog(this);
         mPullToRefreshListViewState = (PullToRefreshListViewState) findViewById(R.id.booklistListView);
 
         mBookListView = mPullToRefreshListViewState.getListView();
         mBookListView.setOnItemClickListener(this);
         url = getIntent().getStringExtra(IntentKey.INTENT_URL_KEY);
+
+        mProgressDialog.show();
         loadData();
     }
 
@@ -92,6 +98,8 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
                     {
                         mBookListAdapter.setList(arrayList);
                     }
+
+                    mProgressDialog.dismiss();
                     break;
 
                 case 2:
@@ -133,7 +141,7 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
     @Override
     public void getBookListFailure()
     {
-
+        mProgressDialog.dismiss();
     }
 
     @Override
@@ -146,4 +154,5 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
         message.obj = bookInfoExpand.getaBookInfos();
         mHandler.sendMessage(message);
     }
+
 }

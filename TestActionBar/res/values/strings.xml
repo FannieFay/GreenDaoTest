@@ -15,5 +15,6 @@
     
     <string name="introduce_add_to_shelf">加入书架</string>
     <string name="introduce_read">阅读</string>
+    <string name="loading">加载中...</string>
 
 </resources>
