@@ -68,7 +68,10 @@ public class DaoSession extends AbstractDaoSession
      */
     public void insertBookInfo(Book book)
     {
-        bookDao.insert(book);
+        if (!isBookSaved(book.getBookName()))
+        {
+            bookDao.insert(book);
+        }
     }
 
     /**
@@ -78,7 +81,10 @@ public class DaoSession extends AbstractDaoSession
      */
     public void insertChapterInfo(Chapter chapter)
     {
-        chapterDao.insert(chapter);
+        if (!isChapterSaved(chapter.getBookName(), chapter.getChapterUrl()))
+        {
+            chapterDao.insert(chapter);
+        }
     }
 
     /**
@@ -135,16 +141,6 @@ public class DaoSession extends AbstractDaoSession
     }
 
     /**
-     * 插入Chapter 数据
-     * 
-     * @param chapter
-     */
-    public void insertChapter(Chapter chapter)
-    {
-        chapterDao.insert(chapter);
-    }
-
-    /**
      * 是否存在该书
      * 
      * @param bookID
@@ -158,4 +154,18 @@ public class DaoSession extends AbstractDaoSession
         return qb.buildCount().count() > 0 ? true : false;
     }
 
+    /**
+     * 是否崔在该章节
+     * 
+     * @param chapterUrl
+     * @return
+     */
+    public boolean isChapterSaved(String bookName, String chapterUrl)
+    {
+        QueryBuilder<Chapter> qb = chapterDao.queryBuilder();
+        qb.where(qb.and(ChapterDao.Properties.ChapterUrl.eq(chapterUrl),
+                ChapterDao.Properties.BookName.eq(bookName)));
+        qb.buildCount().count();
+        return qb.buildCount().count() > 0 ? true : false;
+    }
 }

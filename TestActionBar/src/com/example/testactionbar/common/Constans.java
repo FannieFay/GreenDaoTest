@@ -4,6 +4,7 @@ public class Constans
 {
     public static final String url = "http://www.uukanshu.com";
     public static final int maxBookShelfNum = 15;
+    public static final String DATABASE_NAME = "CatBook";
 
     public class BookTypeUrl
     {
