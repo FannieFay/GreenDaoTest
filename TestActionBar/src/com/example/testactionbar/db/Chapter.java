@@ -6,7 +6,7 @@ package com.example.testactionbar.db;
  */
 public class Chapter {
 
-    private String bookID;
+    private String bookName;
     private String chapterName;
     private String chapterUrl;
     private String chapterContent;
@@ -14,19 +14,19 @@ public class Chapter {
     public Chapter() {
     }
 
-    public Chapter(String bookID, String chapterName, String chapterUrl, String chapterContent) {
-        this.bookID = bookID;
+    public Chapter(String bookName, String chapterName, String chapterUrl, String chapterContent) {
+        this.bookName = bookName;
         this.chapterName = chapterName;
         this.chapterUrl = chapterUrl;
         this.chapterContent = chapterContent;
     }
 
-    public String getBookID() {
-        return bookID;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getChapterName() {

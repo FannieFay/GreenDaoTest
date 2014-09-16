@@ -70,8 +70,7 @@ public class ExampleDaoGenerator
     private static void addBook(Schema schema)
     {
         Entity book = schema.addEntity("Book");
-        book.addStringProperty("bookID").primaryKey().getProperty();
-        book.addStringProperty("bookName");
+        book.addStringProperty("bookName").primaryKey().getProperty();
         book.addStringProperty("bookUrl");
         book.addStringProperty("author");
         book.addStringProperty("state");
@@ -82,7 +81,7 @@ public class ExampleDaoGenerator
         book.addShortProperty("chapterPageIndex");
 
         Entity chapter = schema.addEntity("Chapter");
-        chapter.addStringProperty("bookID");
+        chapter.addStringProperty("bookName");
         chapter.addStringProperty("chapterName");
         chapter.addStringProperty("chapterUrl");
         chapter.addStringProperty("chapterContent");

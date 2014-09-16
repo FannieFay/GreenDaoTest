@@ -1,6 +1,8 @@
 package com.example.testactionbar.view;
 
-public class BookShelfActivity
+import com.example.testactionbar.view.base.BaseActionBarActivity;
+
+public class BookShelfActivity extends BaseActionBarActivity
 {
 
 }

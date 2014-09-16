@@ -23,7 +23,7 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property BookID = new Property(0, String.class, "bookID", false, "BOOK_ID");
+        public final static Property BookName = new Property(0, String.class, "bookName", false, "BOOK_NAME");
         public final static Property ChapterName = new Property(1, String.class, "chapterName", false, "CHAPTER_NAME");
         public final static Property ChapterUrl = new Property(2, String.class, "chapterUrl", false, "CHAPTER_URL");
         public final static Property ChapterContent = new Property(3, String.class, "chapterContent", false, "CHAPTER_CONTENT");
@@ -42,7 +42,7 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CHAPTER' (" + //
-                "'BOOK_ID' TEXT," + // 0: bookID
+                "'BOOK_NAME' TEXT," + // 0: bookName
                 "'CHAPTER_NAME' TEXT," + // 1: chapterName
                 "'CHAPTER_URL' TEXT," + // 2: chapterUrl
                 "'CHAPTER_CONTENT' TEXT);"); // 3: chapterContent
@@ -59,9 +59,9 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     protected void bindValues(SQLiteStatement stmt, Chapter entity) {
         stmt.clearBindings();
  
-        String bookID = entity.getBookID();
-        if (bookID != null) {
-            stmt.bindString(1, bookID);
+        String bookName = entity.getBookName();
+        if (bookName != null) {
+            stmt.bindString(1, bookName);
         }
  
         String chapterName = entity.getChapterName();
@@ -90,7 +90,7 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     @Override
     public Chapter readEntity(Cursor cursor, int offset) {
         Chapter entity = new Chapter( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // bookID
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // bookName
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // chapterName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // chapterUrl
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // chapterContent
@@ -101,7 +101,7 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Chapter entity, int offset) {
-        entity.setBookID(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setBookName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setChapterName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setChapterUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setChapterContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));

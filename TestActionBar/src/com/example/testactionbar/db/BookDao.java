@@ -23,16 +23,15 @@ public class BookDao extends AbstractDao<Book, String> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property BookID = new Property(0, String.class, "bookID", true, "BOOK_ID");
-        public final static Property BookName = new Property(1, String.class, "bookName", false, "BOOK_NAME");
-        public final static Property BookUrl = new Property(2, String.class, "bookUrl", false, "BOOK_URL");
-        public final static Property Author = new Property(3, String.class, "author", false, "AUTHOR");
-        public final static Property State = new Property(4, String.class, "state", false, "STATE");
-        public final static Property Introduce = new Property(5, String.class, "introduce", false, "INTRODUCE");
-        public final static Property LastChapterUrl = new Property(6, String.class, "lastChapterUrl", false, "LAST_CHAPTER_URL");
-        public final static Property LastChapterName = new Property(7, String.class, "lastChapterName", false, "LAST_CHAPTER_NAME");
-        public final static Property ChapterIndex = new Property(8, Short.class, "chapterIndex", false, "CHAPTER_INDEX");
-        public final static Property ChapterPageIndex = new Property(9, Short.class, "chapterPageIndex", false, "CHAPTER_PAGE_INDEX");
+        public final static Property BookName = new Property(0, String.class, "bookName", true, "BOOK_NAME");
+        public final static Property BookUrl = new Property(1, String.class, "bookUrl", false, "BOOK_URL");
+        public final static Property Author = new Property(2, String.class, "author", false, "AUTHOR");
+        public final static Property State = new Property(3, String.class, "state", false, "STATE");
+        public final static Property Introduce = new Property(4, String.class, "introduce", false, "INTRODUCE");
+        public final static Property LastChapterUrl = new Property(5, String.class, "lastChapterUrl", false, "LAST_CHAPTER_URL");
+        public final static Property LastChapterName = new Property(6, String.class, "lastChapterName", false, "LAST_CHAPTER_NAME");
+        public final static Property ChapterIndex = new Property(7, Short.class, "chapterIndex", false, "CHAPTER_INDEX");
+        public final static Property ChapterPageIndex = new Property(8, Short.class, "chapterPageIndex", false, "CHAPTER_PAGE_INDEX");
     };
 
 
@@ -48,16 +47,15 @@ public class BookDao extends AbstractDao<Book, String> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'BOOK' (" + //
-                "'BOOK_ID' TEXT PRIMARY KEY NOT NULL ," + // 0: bookID
-                "'BOOK_NAME' TEXT," + // 1: bookName
-                "'BOOK_URL' TEXT," + // 2: bookUrl
-                "'AUTHOR' TEXT," + // 3: author
-                "'STATE' TEXT," + // 4: state
-                "'INTRODUCE' TEXT," + // 5: introduce
-                "'LAST_CHAPTER_URL' TEXT," + // 6: lastChapterUrl
-                "'LAST_CHAPTER_NAME' TEXT," + // 7: lastChapterName
-                "'CHAPTER_INDEX' INTEGER," + // 8: chapterIndex
-                "'CHAPTER_PAGE_INDEX' INTEGER);"); // 9: chapterPageIndex
+                "'BOOK_NAME' TEXT PRIMARY KEY NOT NULL ," + // 0: bookName
+                "'BOOK_URL' TEXT," + // 1: bookUrl
+                "'AUTHOR' TEXT," + // 2: author
+                "'STATE' TEXT," + // 3: state
+                "'INTRODUCE' TEXT," + // 4: introduce
+                "'LAST_CHAPTER_URL' TEXT," + // 5: lastChapterUrl
+                "'LAST_CHAPTER_NAME' TEXT," + // 6: lastChapterName
+                "'CHAPTER_INDEX' INTEGER," + // 7: chapterIndex
+                "'CHAPTER_PAGE_INDEX' INTEGER);"); // 8: chapterPageIndex
     }
 
     /** Drops the underlying database table. */
@@ -71,54 +69,49 @@ public class BookDao extends AbstractDao<Book, String> {
     protected void bindValues(SQLiteStatement stmt, Book entity) {
         stmt.clearBindings();
  
-        String bookID = entity.getBookID();
-        if (bookID != null) {
-            stmt.bindString(1, bookID);
-        }
- 
         String bookName = entity.getBookName();
         if (bookName != null) {
-            stmt.bindString(2, bookName);
+            stmt.bindString(1, bookName);
         }
  
         String bookUrl = entity.getBookUrl();
         if (bookUrl != null) {
-            stmt.bindString(3, bookUrl);
+            stmt.bindString(2, bookUrl);
         }
  
         String author = entity.getAuthor();
         if (author != null) {
-            stmt.bindString(4, author);
+            stmt.bindString(3, author);
         }
  
         String state = entity.getState();
         if (state != null) {
-            stmt.bindString(5, state);
+            stmt.bindString(4, state);
         }
  
         String introduce = entity.getIntroduce();
         if (introduce != null) {
-            stmt.bindString(6, introduce);
+            stmt.bindString(5, introduce);
         }
  
         String lastChapterUrl = entity.getLastChapterUrl();
         if (lastChapterUrl != null) {
-            stmt.bindString(7, lastChapterUrl);
+            stmt.bindString(6, lastChapterUrl);
         }
  
         String lastChapterName = entity.getLastChapterName();
         if (lastChapterName != null) {
-            stmt.bindString(8, lastChapterName);
+            stmt.bindString(7, lastChapterName);
         }
  
         Short chapterIndex = entity.getChapterIndex();
         if (chapterIndex != null) {
-            stmt.bindLong(9, chapterIndex);
+            stmt.bindLong(8, chapterIndex);
         }
  
         Short chapterPageIndex = entity.getChapterPageIndex();
         if (chapterPageIndex != null) {
-            stmt.bindLong(10, chapterPageIndex);
+            stmt.bindLong(9, chapterPageIndex);
         }
     }
 
@@ -132,16 +125,15 @@ public class BookDao extends AbstractDao<Book, String> {
     @Override
     public Book readEntity(Cursor cursor, int offset) {
         Book entity = new Book( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // bookID
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // bookName
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // bookUrl
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // author
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // state
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // introduce
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // lastChapterUrl
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // lastChapterName
-            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8), // chapterIndex
-            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) // chapterPageIndex
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // bookName
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // bookUrl
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // author
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // state
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // introduce
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // lastChapterUrl
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // lastChapterName
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7), // chapterIndex
+            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) // chapterPageIndex
         );
         return entity;
     }
@@ -149,29 +141,28 @@ public class BookDao extends AbstractDao<Book, String> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Book entity, int offset) {
-        entity.setBookID(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setBookName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setBookUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setAuthor(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setState(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setIntroduce(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setLastChapterUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setLastChapterName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setChapterIndex(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8));
-        entity.setChapterPageIndex(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9));
+        entity.setBookName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setBookUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setAuthor(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setState(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setIntroduce(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setLastChapterUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setLastChapterName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setChapterIndex(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7));
+        entity.setChapterPageIndex(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8));
      }
     
     /** @inheritdoc */
     @Override
     protected String updateKeyAfterInsert(Book entity, long rowId) {
-        return entity.getBookID();
+        return entity.getBookName();
     }
     
     /** @inheritdoc */
     @Override
     public String getKey(Book entity) {
         if(entity != null) {
-            return entity.getBookID();
+            return entity.getBookName();
         } else {
             return null;
         }

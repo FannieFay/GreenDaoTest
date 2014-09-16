@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.database.sqlite.SQLiteDatabase;
-
-import com.example.testactionbar.db.ChapterDao.Properties;
-
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
@@ -100,10 +97,10 @@ public class DaoSession extends AbstractDaoSession
      * @param bookID
      * @return
      */
-    public List<Chapter> getChapterList(int bookID)
+    public List<Chapter> getChapterList(String bookName)
     {
         QueryBuilder<Chapter> qb = chapterDao.queryBuilder();
-        qb.where(Properties.BookID.eq(bookID));
+        qb.where(ChapterDao.Properties.BookName.eq(bookName));
         return qb.list();
     }
 
@@ -112,15 +109,28 @@ public class DaoSession extends AbstractDaoSession
      * 
      * @param bookID
      */
-    public void deleteBook(int bookID)
+    public void deleteBook(String bookName)
     {
         QueryBuilder<Book> qb = bookDao.queryBuilder();
-        DeleteQuery<Book> bd = qb.where(Properties.BookID.eq(bookID)).buildDelete();
+        DeleteQuery<Book> bd = qb.where(BookDao.Properties.BookName.eq(bookName)).buildDelete();
         bd.executeDeleteWithoutDetachingEntities();
 
         QueryBuilder<Chapter> chapterqb = chapterDao.queryBuilder();
-        DeleteQuery<Chapter> chapterbd = chapterqb.where(Properties.BookID.eq(bookID))
-                .buildDelete();
+        DeleteQuery<Chapter> chapterbd = chapterqb.where(
+                ChapterDao.Properties.BookName.eq(bookName)).buildDelete();
+        chapterbd.executeDeleteWithoutDetachingEntities();
+    }
+
+    /**
+     * 删除章节
+     * 
+     * @param bookName
+     */
+    public void deleteChapterByBook(String bookName)
+    {
+        QueryBuilder<Chapter> chapterqb = chapterDao.queryBuilder();
+        DeleteQuery<Chapter> chapterbd = chapterqb.where(
+                ChapterDao.Properties.BookName.eq(bookName)).buildDelete();
         chapterbd.executeDeleteWithoutDetachingEntities();
     }
 
@@ -132,6 +142,20 @@ public class DaoSession extends AbstractDaoSession
     public void insertChapter(Chapter chapter)
     {
         chapterDao.insert(chapter);
+    }
+
+    /**
+     * 是否存在该书
+     * 
+     * @param bookID
+     * @return
+     */
+    public boolean isBookSaved(String bookName)
+    {
+        QueryBuilder<Book> qb = bookDao.queryBuilder();
+        qb.where(BookDao.Properties.BookName.eq(bookName));
+        qb.buildCount().count();
+        return qb.buildCount().count() > 0 ? true : false;
     }
 
 }

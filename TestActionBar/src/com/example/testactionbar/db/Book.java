@@ -6,7 +6,6 @@ package com.example.testactionbar.db;
  */
 public class Book {
 
-    private String bookID;
     private String bookName;
     private String bookUrl;
     private String author;
@@ -20,12 +19,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(String bookID) {
-        this.bookID = bookID;
+    public Book(String bookName) {
+        this.bookName = bookName;
     }
 
-    public Book(String bookID, String bookName, String bookUrl, String author, String state, String introduce, String lastChapterUrl, String lastChapterName, Short chapterIndex, Short chapterPageIndex) {
-        this.bookID = bookID;
+    public Book(String bookName, String bookUrl, String author, String state, String introduce, String lastChapterUrl, String lastChapterName, Short chapterIndex, Short chapterPageIndex) {
         this.bookName = bookName;
         this.bookUrl = bookUrl;
         this.author = author;
@@ -35,14 +33,6 @@ public class Book {
         this.lastChapterName = lastChapterName;
         this.chapterIndex = chapterIndex;
         this.chapterPageIndex = chapterPageIndex;
-    }
-
-    public String getBookID() {
-        return bookID;
-    }
-
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
     }
 
     public String getBookName() {
