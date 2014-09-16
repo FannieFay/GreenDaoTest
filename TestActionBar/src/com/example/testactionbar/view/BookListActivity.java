@@ -2,7 +2,6 @@ package com.example.testactionbar.view;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,11 +18,13 @@ import com.example.testactionbar.modle.BookInfo;
 import com.example.testactionbar.modle.BookInfoExpand;
 import com.example.testactionbar.presenter.BookListPresenter;
 import com.example.testactionbar.view.adapter.BookListAdapter;
+import com.example.testactionbar.view.base.BaseActionBarActivity;
 import com.example.testactionbar.widget.CustomProgressDialog;
 import com.example.testactionbar.widget.PullToRefreshListViewState;
 import com.example.testactionbar.widget.PullToRefreshListViewState.RefreshState;
 
-public class BookListActivity extends Activity implements IBookListView, OnItemClickListener
+public class BookListActivity extends BaseActionBarActivity implements IBookListView,
+        OnItemClickListener
 {
     PullToRefreshListViewState mPullToRefreshListViewState;
 
@@ -47,6 +48,8 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
 
     private void initView()
     {
+        initActionBar();
+
         mProgressDialog = new CustomProgressDialog(this);
         mPullToRefreshListViewState = (PullToRefreshListViewState) findViewById(R.id.booklistListView);
 
@@ -123,6 +126,7 @@ public class BookListActivity extends Activity implements IBookListView, OnItemC
         intent.setClass(BookListActivity.this, BookIntroduceActivity.class);
         intent.putExtra(IntentKey.INTENT_BOOKINFO_KEY, bookInfo);
         intent.putExtra(IntentKey.INTENT_URL_KEY, bookInfo.getUrl());
+        intent.putExtra(IntentKey.INTENT_TITLE_KEY, bookInfo.getBookName());
         startActivity(intent);
     }
 

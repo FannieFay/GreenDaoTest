@@ -26,6 +26,7 @@ import com.example.testactionbar.util.BookPageConfiguration;
 import com.example.testactionbar.util.BookPageFactory;
 import com.example.testactionbar.util.CalendarUtil;
 import com.example.testactionbar.view.adapter.ViewPageFragmentAdapter;
+import com.example.testactionbar.widget.CustomProgressDialog;
 import com.example.testactionbar.widget.MenuPopupWindow;
 import com.example.testactionbar.widget.MenuPopupWindow.PopClickListener;
 
@@ -36,7 +37,6 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
     TextView mTvchapterContent, mTvTime;
 
     ArrayList<String> mList;
-    View loadingView;
 
     ArrayList<StartAndEnd> aStartAndEnds;
 
@@ -55,6 +55,8 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     MenuPopupWindow menuWindow;
 
+    CustomProgressDialog mCustomProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,6 +68,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         int width = dm.widthPixels;// 宽度
         int height = dm.heightPixels;// 高度
 
+        mCustomProgressDialog = new CustomProgressDialog(this);
         /**
          * 初始化数据
          */
@@ -88,7 +91,6 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         mTvTime = (TextView) findViewById(R.id.chapterContentTime);
         mViewPager.setOnTouchListener(this);
         mViewPager.setOnPageChangeListener(this);
-        loadingView = findViewById(R.id.loading);
         aStartAndEnds = new ArrayList<StartAndEnd>();
 
         showLoadingView();
@@ -96,9 +98,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         startThread();
 
         mTvchapterContent.setText(chapters.get(position).getName());
-
         mPresenter.getChapterContent(chapters.get(position).getUrl(), true);
-
     }
 
     public void startThread()
@@ -148,14 +148,14 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     private void showLoadingView()
     {
-        loadingView.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.GONE);
+        mCustomProgressDialog.show();
     }
 
     private void showContentView()
     {
-        loadingView.setVisibility(View.GONE);
         mViewPager.setVisibility(View.VISIBLE);
+        mCustomProgressDialog.dismiss();
     }
 
     private void initList(String string, boolean isStart)
@@ -231,7 +231,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
     @Override
     public void getChapterContentFailure()
     {
-
+        mCustomProgressDialog.dismiss();
     }
 
     float x_tmp1 = 0, y_tmp1 = 0, x_tmp2, y_tmp2 = 0;

@@ -3,6 +3,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/book_background"
+    android:padding="4dp"
     android:orientation="vertical" >
    	
     
@@ -13,6 +15,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/margin_right"
+        android:includeFontPadding="false"
+        android:textColor="@color/black_900"
         />
     <TextView 
         android:id="@+id/chapterContentTv"
@@ -20,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/chapterContentTime"
+        android:textColor="@color/black_900"
         />
     
      <android.support.v4.view.ViewPager
@@ -30,8 +35,4 @@
         android:persistentDrawingCache="animation" 
         android:layout_above="@+id/chapterContentTv"/>
      
-     <include 
-         layout="@layout/layout_loading"
-         android:id="@+id/loading"
-         />
 </RelativeLayout>

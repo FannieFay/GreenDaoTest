@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/book_background"
     android:orientation="vertical" >
     
 	<ListView 
 	    android:id="@+id/chapter_list"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
+	    android:divider="@color/black_400"
+        android:dividerHeight="1dp"
 	    >
 	</ListView>
     

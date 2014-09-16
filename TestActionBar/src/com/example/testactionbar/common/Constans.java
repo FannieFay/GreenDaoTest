@@ -3,6 +3,7 @@ package com.example.testactionbar.common;
 public class Constans
 {
     public static final String url = "http://www.uukanshu.com";
+    public static final int maxBookShelfNum = 15;
 
     public class BookTypeUrl
     {

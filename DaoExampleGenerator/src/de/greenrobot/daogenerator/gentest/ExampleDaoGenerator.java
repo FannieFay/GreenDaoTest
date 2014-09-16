@@ -28,7 +28,6 @@ import de.greenrobot.daogenerator.Schema;
  */
 public class ExampleDaoGenerator
 {
-
     public static void main(String[] args) throws Exception
     {
         Schema schema = new Schema(1000, "com.example.testactionbar.db");
@@ -79,6 +78,14 @@ public class ExampleDaoGenerator
         book.addStringProperty("introduce");
         book.addStringProperty("lastChapterUrl");
         book.addStringProperty("lastChapterName");
+        book.addShortProperty("chapterIndex");
+        book.addShortProperty("chapterPageIndex");
+
+        Entity chapter = schema.addEntity("Chapter");
+        chapter.addStringProperty("bookID");
+        chapter.addStringProperty("chapterName");
+        chapter.addStringProperty("chapterUrl");
+        chapter.addStringProperty("chapterContent");
 
         // Entity chapter = schema.addEntity("Chapter");
         // Property bookID = chapter.addStringProperty("bookID").getProperty();

@@ -31,6 +31,8 @@ public class BookDao extends AbstractDao<Book, String> {
         public final static Property Introduce = new Property(5, String.class, "introduce", false, "INTRODUCE");
         public final static Property LastChapterUrl = new Property(6, String.class, "lastChapterUrl", false, "LAST_CHAPTER_URL");
         public final static Property LastChapterName = new Property(7, String.class, "lastChapterName", false, "LAST_CHAPTER_NAME");
+        public final static Property ChapterIndex = new Property(8, Short.class, "chapterIndex", false, "CHAPTER_INDEX");
+        public final static Property ChapterPageIndex = new Property(9, Short.class, "chapterPageIndex", false, "CHAPTER_PAGE_INDEX");
     };
 
 
@@ -53,7 +55,9 @@ public class BookDao extends AbstractDao<Book, String> {
                 "'STATE' TEXT," + // 4: state
                 "'INTRODUCE' TEXT," + // 5: introduce
                 "'LAST_CHAPTER_URL' TEXT," + // 6: lastChapterUrl
-                "'LAST_CHAPTER_NAME' TEXT);"); // 7: lastChapterName
+                "'LAST_CHAPTER_NAME' TEXT," + // 7: lastChapterName
+                "'CHAPTER_INDEX' INTEGER," + // 8: chapterIndex
+                "'CHAPTER_PAGE_INDEX' INTEGER);"); // 9: chapterPageIndex
     }
 
     /** Drops the underlying database table. */
@@ -106,6 +110,16 @@ public class BookDao extends AbstractDao<Book, String> {
         if (lastChapterName != null) {
             stmt.bindString(8, lastChapterName);
         }
+ 
+        Short chapterIndex = entity.getChapterIndex();
+        if (chapterIndex != null) {
+            stmt.bindLong(9, chapterIndex);
+        }
+ 
+        Short chapterPageIndex = entity.getChapterPageIndex();
+        if (chapterPageIndex != null) {
+            stmt.bindLong(10, chapterPageIndex);
+        }
     }
 
     /** @inheritdoc */
@@ -125,7 +139,9 @@ public class BookDao extends AbstractDao<Book, String> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // state
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // introduce
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // lastChapterUrl
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // lastChapterName
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // lastChapterName
+            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8), // chapterIndex
+            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) // chapterPageIndex
         );
         return entity;
     }
@@ -141,6 +157,8 @@ public class BookDao extends AbstractDao<Book, String> {
         entity.setIntroduce(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setLastChapterUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setLastChapterName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setChapterIndex(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8));
+        entity.setChapterPageIndex(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9));
      }
     
     /** @inheritdoc */

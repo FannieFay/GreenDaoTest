@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -14,8 +13,9 @@ import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
 import com.example.testactionbar.modle.Chapter;
 import com.example.testactionbar.view.adapter.ChapterListAapter;
+import com.example.testactionbar.view.base.BaseActionBarActivity;
 
-public class BookChapterListActivity extends FragmentActivity
+public class BookChapterListActivity extends BaseActionBarActivity
 {
 
     ListView listView;
@@ -27,6 +27,7 @@ public class BookChapterListActivity extends FragmentActivity
     {
         super.onCreate(bundle);
         setContentView(R.layout.activity_book_chapter_list);
+        initActionBar();
 
         aChapters = (ArrayList<Chapter>) getIntent().getSerializableExtra(
                 IntentKey.INTENT_CHAPTER_LIST_KEY);

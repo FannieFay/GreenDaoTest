@@ -1,8 +1,8 @@
 package com.example.testactionbar.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,11 +12,12 @@ import com.example.testactionbar.R;
 import com.example.testactionbar.common.Constans.RankName;
 import com.example.testactionbar.common.Constans.RankUrl;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.view.base.BaseActionBarActivity;
 
-public class RankActivity extends Activity
+public class RankActivity extends BaseActionBarActivity
 {
-
     LinearLayout linear_rank;
+    ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +30,9 @@ public class RankActivity extends Activity
 
     private void initView()
     {
+        mActionBar = getSupportActionBar();
+        mActionBar.setTitle(getResources().getString(R.string.bookRank));
+
         linear_rank = (LinearLayout) findViewById(R.id.linear_rank);
         String typeName = null;
         String typeUrl = null;

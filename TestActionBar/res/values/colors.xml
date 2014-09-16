@@ -2,6 +2,8 @@
 <resources>
 
     <color name="pageTextColor">#000000</color>
+    <color name="red_800">#d01716</color>
+    <color name="cyan_100">#b2ebf2</color>
     <color name="cyan_400">#26c6da</color>
     <color name="cyan_300">#4dd0e1</color>
     <color name="cyan_500">#00bcd4</color>

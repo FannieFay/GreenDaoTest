@@ -14,6 +14,8 @@ public class Book {
     private String introduce;
     private String lastChapterUrl;
     private String lastChapterName;
+    private Short chapterIndex;
+    private Short chapterPageIndex;
 
     public Book() {
     }
@@ -22,7 +24,7 @@ public class Book {
         this.bookID = bookID;
     }
 
-    public Book(String bookID, String bookName, String bookUrl, String author, String state, String introduce, String lastChapterUrl, String lastChapterName) {
+    public Book(String bookID, String bookName, String bookUrl, String author, String state, String introduce, String lastChapterUrl, String lastChapterName, Short chapterIndex, Short chapterPageIndex) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.bookUrl = bookUrl;
@@ -31,6 +33,8 @@ public class Book {
         this.introduce = introduce;
         this.lastChapterUrl = lastChapterUrl;
         this.lastChapterName = lastChapterName;
+        this.chapterIndex = chapterIndex;
+        this.chapterPageIndex = chapterPageIndex;
     }
 
     public String getBookID() {
@@ -95,6 +99,22 @@ public class Book {
 
     public void setLastChapterName(String lastChapterName) {
         this.lastChapterName = lastChapterName;
+    }
+
+    public Short getChapterIndex() {
+        return chapterIndex;
+    }
+
+    public void setChapterIndex(Short chapterIndex) {
+        this.chapterIndex = chapterIndex;
+    }
+
+    public Short getChapterPageIndex() {
+        return chapterPageIndex;
+    }
+
+    public void setChapterPageIndex(Short chapterPageIndex) {
+        this.chapterPageIndex = chapterPageIndex;
     }
 
 }

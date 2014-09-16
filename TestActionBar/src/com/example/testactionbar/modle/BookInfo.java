@@ -108,7 +108,7 @@ public class BookInfo implements Serializable
                     {
                         detailIntroduce.append(((TextNode) object).text().replace("http://", "")
                                 .replace("www.uukanshu.com", "").replace("Www.uukanshu.com", "")
-                                .replace("Www.uuKanShu.Com", "").trim()
+                                .replace("Www.uuKanShu.Com", "").trim().replace(" ", "　")
                                 + "\n");
                     }
                 }

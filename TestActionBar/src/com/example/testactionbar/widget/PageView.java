@@ -20,6 +20,8 @@ public class PageView extends View
     int marginTop;
     int start, end;
 
+    Context context;
+
     public PageView(Context context, ArrayList<String> arrayList, int start, int end)
     {
         super(context);
@@ -31,6 +33,7 @@ public class PageView extends View
         perHeight = mBookPageFactory.getWordPerHeight();
         margin = mBookPageFactory.getMargin();
         marginTop = mBookPageFactory.getMarginTop();
+        this.context = context;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class PageView extends View
     {
         super.onDraw(canvas);
         Paint sPaint = new Paint();
-        sPaint.setColor(R.color.pageTextColor);
+        sPaint.setColor(context.getResources().getColor(R.color.black_900));
         sPaint.setTextSize(mBookPageFactory.getSize());
 
         int currentHeight = 0;

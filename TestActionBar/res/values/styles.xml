@@ -2,8 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.    -->
     <style name="AppBaseTheme" parent="Theme.Base.AppCompat"></style>
 
     <!-- Application theme. -->
@@ -33,6 +32,8 @@
         <item name="android:layout_marginLeft">@dimen/margin_left</item>
         <item name="android:layout_marginRight">@dimen/margin_right</item>
         <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:textColor" >@color/white</item>
+        <item name="android:textSize">@dimen/book_list_size</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -49,6 +50,7 @@
         <item name="android:layout_marginRight">@dimen/margin_right</item>
         <item name="android:background">@drawable/selector_btn</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/book_list_size</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -67,6 +69,7 @@
     <style name="BaseText_Simple">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/book_list_size</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:lineSpacingExtra">3dp</item>
     </style>
