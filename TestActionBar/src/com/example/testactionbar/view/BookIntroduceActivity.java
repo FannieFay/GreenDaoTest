@@ -7,21 +7,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.testactionbar.IBookIntroduceView;
 import com.example.testactionbar.R;
+import com.example.testactionbar.application.Myapplication;
 import com.example.testactionbar.common.IntentKey;
+import com.example.testactionbar.db.Book;
+import com.example.testactionbar.db.BookDao;
+import com.example.testactionbar.db.Chapter;
+import com.example.testactionbar.db.ChapterDao;
+import com.example.testactionbar.db.ChapterDao.Properties;
 import com.example.testactionbar.modle.BookInfo;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 import com.example.testactionbar.presenter.BookIntroducePresenter;
 import com.example.testactionbar.view.base.BaseActionBarActivity;
 import com.example.testactionbar.widget.CustomAlertDialog;
 import com.example.testactionbar.widget.CustomAlertDialog.OnCustomClickListener;
 import com.example.testactionbar.widget.CustomProgressDialog;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 public class BookIntroduceActivity extends BaseActionBarActivity implements IBookIntroduceView
 {
@@ -30,9 +40,15 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
     private String url;
     private BookInfo bookInfo;
     private Button btnRead, btnAddToShelf;
-    private ArrayList<Chapter> arrayChapters;
+    private ArrayList<ChapterInfo> arrayChapters;
     private CustomProgressDialog mProgressDialog;
     private CustomAlertDialog customAlertDialog;
+
+    // DB
+    private BookDao bookDao;
+    private ChapterDao chapterDao;
+    private Book book;
+    private ArrayList<Chapter> chapterList;
 
     @Override
     protected void onCreate(Bundle bundle)
@@ -51,7 +67,18 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
         bookInfo = (BookInfo) getIntent().getSerializableExtra(IntentKey.INTENT_BOOKINFO_KEY);
         url = getIntent().getStringExtra(IntentKey.INTENT_URL_KEY);
         showLoadingView();
-        mPresenter.getBookInfoDetail(url, bookInfo);
+
+        bookDao = Myapplication.getBookDao();
+        chapterDao = Myapplication.getChapterDao();
+        book = bookDao.load(bookInfo.getBookName());
+        if (book == null)
+        {
+            mPresenter.getBookInfoDetail(url, bookInfo);
+        }
+        else
+        {
+            initDBData(book);
+        }
 
         btnRead.setOnClickListener(new OnClickListener()
         {
@@ -60,7 +87,17 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
             {
                 Intent intent = new Intent();
                 intent.setClass(BookIntroduceActivity.this, BookChapterListActivity.class);
-                intent.putExtra(IntentKey.INTENT_CHAPTER_LIST_KEY, arrayChapters);
+                if (book != null)
+                {
+                    intent.putExtra(IntentKey.INTENT_FROM_KEY, BookChapterListActivity.FROM_DB);
+                    intent.putExtra(IntentKey.INTENT_CHAPTER_LIST_KEY, chapterList);
+                    intent.putExtra(IntentKey.INTENT_BOOKINFO_KEY, book);
+                }
+                {
+                    intent.putExtra(IntentKey.INTENT_FROM_KEY, BookChapterListActivity.FROM_NET);
+                    intent.putExtra(IntentKey.INTENT_BOOKINFO_KEY, bookInfo);
+                }
+
                 intent.putExtra(IntentKey.INTENT_TITLE_KEY, title);
                 startActivity(intent);
             }
@@ -79,11 +116,41 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
                                     .setTitle(getResources().getString(R.string.collect))
                                     .setLeftButton("确认", new OnCustomClickListener()
                                     {
-
                                         @Override
                                         public void onClick(DialogInterface dialog)
                                         {
                                             customAlertDialog.dismiss();
+                                            mProgressDialog.show();
+
+                                            Thread thread = new Thread(new Runnable()
+                                            {
+
+                                                @Override
+                                                public void run()
+                                                {
+                                                    Book book = BookInfo.bookInfoToBook(bookInfo,
+                                                            "0", "0");
+                                                    Log.e("time0", System.currentTimeMillis() + "");
+                                                    bookDao.insertOrReplace(book);
+                                                    Log.e("time1", System.currentTimeMillis() + "");
+                                                    ArrayList<Chapter> chapterList = ChapterInfo
+                                                            .chapterInfoToChapter(
+                                                                    book.getBookName(),
+                                                                    arrayChapters);
+                                                    Log.e("time2", System.currentTimeMillis() + "");
+                                                    for (int i = 0; i < chapterList.size(); i++)
+                                                    {
+                                                        Log.e("time3" + ":" + i,
+                                                                System.currentTimeMillis() + "");
+                                                        chapterDao.insertOrReplace(chapterList
+                                                                .get(i));
+                                                    }
+                                                    Log.e("time3", System.currentTimeMillis() + "");
+                                                    mHandler.sendEmptyMessage(2);
+                                                }
+                                            });
+                                            thread.start();
+
                                         }
                                     }).setRightButton("取消", new OnCustomClickListener()
                                     {
@@ -99,6 +166,18 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
                 customAlertDialog.show();
             }
         });
+    }
+
+    private void initDBData(Book book)
+    {
+        QueryBuilder qb = chapterDao.queryBuilder();
+        qb.where(Properties.BookName.eq(book.getBookName()));
+        chapterList = (ArrayList<Chapter>) qb.list();
+
+        mTVBookIntroduce.setText(book.getAuthor() + "\n\n" + "书名 : " + book.getBookName() + "\n\n"
+                + "状态 : " + book.getState() + "\n\n" + book.getIntroduce() + "\n\n");
+        showContentView();
+        btnAddToShelf.setVisibility(View.GONE);
     }
 
     @Override
@@ -149,6 +228,9 @@ public class BookIntroduceActivity extends BaseActionBarActivity implements IBoo
                     break;
 
                 case 2:
+                    Toast.makeText(BookIntroduceActivity.this, "添加完成", Toast.LENGTH_SHORT).show();
+                    btnAddToShelf.setVisibility(View.GONE);
+                    mProgressDialog.dismiss();
                     break;
                 default:
                     break;

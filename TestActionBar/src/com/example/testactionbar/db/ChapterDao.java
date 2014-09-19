@@ -14,7 +14,7 @@ import com.example.testactionbar.db.Chapter;
 /** 
  * DAO for table CHAPTER.
 */
-public class ChapterDao extends AbstractDao<Chapter, Void> {
+public class ChapterDao extends AbstractDao<Chapter, Long> {
 
     public static final String TABLENAME = "CHAPTER";
 
@@ -23,10 +23,11 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property BookName = new Property(0, String.class, "bookName", false, "BOOK_NAME");
-        public final static Property ChapterName = new Property(1, String.class, "chapterName", false, "CHAPTER_NAME");
-        public final static Property ChapterUrl = new Property(2, String.class, "chapterUrl", false, "CHAPTER_URL");
-        public final static Property ChapterContent = new Property(3, String.class, "chapterContent", false, "CHAPTER_CONTENT");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property BookName = new Property(1, String.class, "bookName", false, "BOOK_NAME");
+        public final static Property ChapterName = new Property(2, String.class, "chapterName", false, "CHAPTER_NAME");
+        public final static Property ChapterUrl = new Property(3, String.class, "chapterUrl", false, "CHAPTER_URL");
+        public final static Property ChapterContent = new Property(4, String.class, "chapterContent", false, "CHAPTER_CONTENT");
     };
 
 
@@ -42,10 +43,11 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'CHAPTER' (" + //
-                "'BOOK_NAME' TEXT," + // 0: bookName
-                "'CHAPTER_NAME' TEXT," + // 1: chapterName
-                "'CHAPTER_URL' TEXT," + // 2: chapterUrl
-                "'CHAPTER_CONTENT' TEXT);"); // 3: chapterContent
+                "'_id' INTEGER PRIMARY KEY ," + // 0: id
+                "'BOOK_NAME' TEXT," + // 1: bookName
+                "'CHAPTER_NAME' TEXT," + // 2: chapterName
+                "'CHAPTER_URL' TEXT," + // 3: chapterUrl
+                "'CHAPTER_CONTENT' TEXT);"); // 4: chapterContent
     }
 
     /** Drops the underlying database table. */
@@ -59,41 +61,47 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     protected void bindValues(SQLiteStatement stmt, Chapter entity) {
         stmt.clearBindings();
  
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
         String bookName = entity.getBookName();
         if (bookName != null) {
-            stmt.bindString(1, bookName);
+            stmt.bindString(2, bookName);
         }
  
         String chapterName = entity.getChapterName();
         if (chapterName != null) {
-            stmt.bindString(2, chapterName);
+            stmt.bindString(3, chapterName);
         }
  
         String chapterUrl = entity.getChapterUrl();
         if (chapterUrl != null) {
-            stmt.bindString(3, chapterUrl);
+            stmt.bindString(4, chapterUrl);
         }
  
         String chapterContent = entity.getChapterContent();
         if (chapterContent != null) {
-            stmt.bindString(4, chapterContent);
+            stmt.bindString(5, chapterContent);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Chapter readEntity(Cursor cursor, int offset) {
         Chapter entity = new Chapter( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // bookName
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // chapterName
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // chapterUrl
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // chapterContent
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // bookName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // chapterName
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // chapterUrl
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // chapterContent
         );
         return entity;
     }
@@ -101,23 +109,28 @@ public class ChapterDao extends AbstractDao<Chapter, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Chapter entity, int offset) {
-        entity.setBookName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setChapterName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setChapterUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setChapterContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setBookName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setChapterName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setChapterUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setChapterContent(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(Chapter entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Long updateKeyAfterInsert(Chapter entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(Chapter entity) {
-        return null;
+    public Long getKey(Chapter entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

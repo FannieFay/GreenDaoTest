@@ -33,9 +33,9 @@ public interface IntentKey
     public final String INTENT_CHAPTER_LIST_KEY = "intent_chapter_list_key";
 
     /**
-     * Chapter class
+     * ChapterInfo class
      */
-    public final String INTENT_CHAPTER_KEY = "intent_chapter_key";
+    public final String INTENT_CHAPTER_INFO_KEY = "intent_chapter_info_key";
 
     /**
      * position
@@ -51,4 +51,15 @@ public interface IntentKey
      * 标题
      */
     public final String INTENT_TITLE_KEY = "intent_title_key";
+
+    /**
+     * where
+     */
+    public final String INTENT_FROM_KEY = "intent_form_key";
+
+    // DB
+    public final String INTENT_DB_BOOK_KEY = "intent_db_book_key"; // 传递数据库Book
+    public final String INTENT_DB_CHAPTER_KEY = "intent_db_chapter_key"; // 传递数据库Chapter
+    public final String INTENT_DB_CHAPTER_LIST_KEY = "intent_db_chapter_list_key"; // 传递数据库ChapterList
+
 }

@@ -10,7 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.testactionbar.IChapterContentView;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 import com.example.testactionbar.presenter.request.HttpUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -41,7 +41,7 @@ public class ChapterContentPresenter
                 {
                     html = new String(responseBody, "gb2312");
                     Document doc = Jsoup.parse(html);
-                    String string = Chapter.getChapterContent(doc);
+                    String string = ChapterInfo.getChapterContent(doc);
                     mView.getChapterContentSuccess(string, isStart);
                 } catch (UnsupportedEncodingException e)
                 {

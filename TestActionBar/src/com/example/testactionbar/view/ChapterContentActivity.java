@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.example.testactionbar.IChapterContentView;
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 import com.example.testactionbar.modle.StartAndEnd;
 import com.example.testactionbar.presenter.ChapterContentPresenter;
 import com.example.testactionbar.util.BookPageConfiguration;
@@ -40,7 +40,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
 
     ArrayList<StartAndEnd> aStartAndEnds;
 
-    ArrayList<Chapter> chapters;
+    ArrayList<ChapterInfo> chapters;
     int position;
     int pagePosition;
     int maxPageNum;
@@ -81,7 +81,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
                 .setSize((int) getResources().getDimension(R.dimen.word_size)));
 
         mPresenter = new ChapterContentPresenter(this, this);
-        chapters = (ArrayList<Chapter>) getIntent().getSerializableExtra(
+        chapters = (ArrayList<ChapterInfo>) getIntent().getSerializableExtra(
                 IntentKey.INTENT_CHAPTER_LIST_KEY);
         position = getIntent().getIntExtra(IntentKey.INTENT_POSITION_KEY, -1);
 
@@ -98,6 +98,7 @@ public class ChapterContentActivity extends FragmentActivity implements IChapter
         startThread();
 
         mTvchapterContent.setText(chapters.get(position).getName());
+
         mPresenter.getChapterContent(chapters.get(position).getUrl(), true);
     }
 

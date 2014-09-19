@@ -20,7 +20,6 @@ public class BaseActionBarActivity extends ActionBarActivity
     {
         title = getIntent().getStringExtra(IntentKey.INTENT_TITLE_KEY);
         getSupportActionBar().setTitle(title);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

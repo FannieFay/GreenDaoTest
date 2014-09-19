@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.example.testactionbar.common.Constans;
 import com.example.testactionbar.common.Constans.BookTypeUrl;
 import com.example.testactionbar.common.Constans.RankUrl;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 import com.example.testactionbar.presenter.request.HttpUtils;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -51,7 +51,7 @@ public class ListLinks extends Activity
                     String string = new String(responseBody, "gb2312");
                     Log.e("success1", string);
                     Document document = Jsoup.parse(string);
-                    String string1 = Chapter.getChapterContent(document);
+                    String string1 = ChapterInfo.getChapterContent(document);
                     Log.e("success2", string1);
 
                 } catch (UnsupportedEncodingException e)

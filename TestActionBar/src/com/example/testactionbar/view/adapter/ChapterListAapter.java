@@ -10,26 +10,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.testactionbar.R;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 
 public class ChapterListAapter extends BaseAdapter
 {
-    ArrayList<Chapter> aChapters;
+    ArrayList<ChapterInfo> aChapters;
     Context mContext;
 
-    public ChapterListAapter(Context mContext, ArrayList<Chapter> aChapters)
+    public ChapterListAapter(Context mContext, ArrayList<ChapterInfo> aChapters)
     {
         this.mContext = mContext;
         this.aChapters = aChapters;
     }
 
-    public void setList(ArrayList<Chapter> aChapters)
+    public void setList(ArrayList<ChapterInfo> aChapters)
     {
         this.aChapters = aChapters;
         notifyDataSetChanged();
     }
 
-    public ArrayList<Chapter> getList()
+    public ArrayList<ChapterInfo> getList()
     {
         return this.aChapters;
     }
@@ -41,7 +41,7 @@ public class ChapterListAapter extends BaseAdapter
     }
 
     @Override
-    public Chapter getItem(int position)
+    public ChapterInfo getItem(int position)
     {
         return aChapters.get(position);
     }
@@ -55,7 +55,7 @@ public class ChapterListAapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        Chapter chapter = aChapters.get(position);
+        ChapterInfo chapter = aChapters.get(position);
         ViewHolder mViewHolder = null;
         if (convertView == null)
         {

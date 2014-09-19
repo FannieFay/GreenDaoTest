@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.testactionbar.common.Constans;
+import com.example.testactionbar.db.BookDao;
+import com.example.testactionbar.db.ChapterDao;
 import com.example.testactionbar.db.DaoMaster;
 import com.example.testactionbar.db.DaoMaster.OpenHelper;
 import com.example.testactionbar.db.DaoSession;
@@ -13,6 +15,8 @@ public class Myapplication extends Application
     private static Myapplication mInstance = null;
     private static DaoMaster daoMaster;
     private static DaoSession daoSession;
+    private static BookDao bookDao;
+    private static ChapterDao chapterDao;
 
     public static Myapplication getInstance()
     {
@@ -56,8 +60,19 @@ public class Myapplication extends Application
                 daoMaster = getDaoMaster(context);
             }
             daoSession = daoMaster.newSession();
+            bookDao = daoSession.getBookDao();
+            chapterDao = daoSession.getChapterDao();
         }
         return daoSession;
     }
 
+    public static BookDao getBookDao()
+    {
+        return bookDao;
+    }
+
+    public static ChapterDao getChapterDao()
+    {
+        return chapterDao;
+    }
 }

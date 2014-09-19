@@ -263,19 +263,19 @@ public final class R {
 		public static final int progress_horizontal_home = 0x7f020082;
 		public static final int progress_primary_home = 0x7f020084;
 		public static final int progress_secondary_home = 0x7f020086;
-		public static final int selectable_background_home = 0x7f020088;
-		public static final int spinner_ab_default_home = 0x7f020093;
-		public static final int spinner_ab_disabled_home = 0x7f020095;
-		public static final int spinner_ab_focused_home = 0x7f020097;
-		public static final int spinner_ab_pressed_home = 0x7f020099;
-		public static final int spinner_background_ab_home = 0x7f02009b;
-		public static final int tab_indicator_ab_home = 0x7f02009d;
-		public static final int tab_selected_focused_home = 0x7f0200a0;
-		public static final int tab_selected_home = 0x7f0200a1;
-		public static final int tab_selected_pressed_home = 0x7f0200a3;
-		public static final int tab_unselected_focused_home = 0x7f0200a6;
-		public static final int tab_unselected_home = 0x7f0200a7;
-		public static final int tab_unselected_pressed_home = 0x7f0200a9;
+		public static final int selectable_background_home = 0x7f020089;
+		public static final int spinner_ab_default_home = 0x7f020094;
+		public static final int spinner_ab_disabled_home = 0x7f020096;
+		public static final int spinner_ab_focused_home = 0x7f020098;
+		public static final int spinner_ab_pressed_home = 0x7f02009a;
+		public static final int spinner_background_ab_home = 0x7f02009c;
+		public static final int tab_indicator_ab_home = 0x7f02009e;
+		public static final int tab_selected_focused_home = 0x7f0200a1;
+		public static final int tab_selected_home = 0x7f0200a2;
+		public static final int tab_selected_pressed_home = 0x7f0200a4;
+		public static final int tab_unselected_focused_home = 0x7f0200a7;
+		public static final int tab_unselected_home = 0x7f0200a8;
+		public static final int tab_unselected_pressed_home = 0x7f0200aa;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f05002b;
@@ -366,7 +366,7 @@ public final class R {
 		public static final int abc_popup_menu_item_layout = 0x7f030014;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03002e;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03002f;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f080007;

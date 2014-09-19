@@ -9,6 +9,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import com.example.testactionbar.common.Constans;
+import com.example.testactionbar.db.Book;
 
 public class BookInfo implements Serializable
 {
@@ -21,7 +22,7 @@ public class BookInfo implements Serializable
     String state; // 状态 完结 连载
     String detailIntroduce;// 详细简介
     String detailNewChapter;// 详细的最新章节
-    ArrayList<Chapter> characters;// 章节列表
+    ArrayList<ChapterInfo> characters;// 章节列表
 
     /**
      * 获取书本信息
@@ -67,7 +68,7 @@ public class BookInfo implements Serializable
         {
             bookInfo.setUrl(Constans.url + urlElements.attr("href"));
             bookInfo.setImage(Constans.url + urlElements.select("img[onerror]").attr("src"));
-            bookInfo.setBookName(urlElements.select("img[onerror]").attr("alt"));
+            bookInfo.setBookName(urlElements.select("img[onerror]").attr("alt").replace("全文阅读", ""));
         }
 
         Elements stateElements = lElement.select("span[class=status-text]");
@@ -117,13 +118,13 @@ public class BookInfo implements Serializable
 
         bookInfo.setDetailIntroduce(detailIntroduce.toString());
         Elements elements2 = doc.select("div[class=zhangjie clear]");
-        Elements elements3 = elements2.select("ul[id=chapterList]");
-        Elements elementsChapter = elements3.select("a[href]");
+        // Elements elements3 = elements2.select("ul[id=chapterList]");
+        Elements elementsChapter = elements2.select("a[href]");
 
-        ArrayList<Chapter> chapters = new ArrayList<Chapter>();
+        ArrayList<ChapterInfo> chapters = new ArrayList<ChapterInfo>();
         for (int i = 0; i < elementsChapter.size(); i++)
         {
-            Chapter chapter = new Chapter();
+            ChapterInfo chapter = new ChapterInfo();
             Element chapterElement = elementsChapter.get(i);
             String text = chapterElement.text();
             String url = Constans.url + chapterElement.attr("href");
@@ -133,6 +134,21 @@ public class BookInfo implements Serializable
         }
         bookInfo.setCharacters(chapters);
         return bookInfo;
+    }
+
+    public static Book bookInfoToBook(BookInfo bookInfo, String ChapterIndex,
+            String ChapterPageIndex)
+    {
+        Book book = new Book();
+        book.setBookName(bookInfo.getBookName());
+        book.setBookUrl(bookInfo.getUrl());
+        book.setAuthor(bookInfo.getAuthor());
+        book.setImage(bookInfo.getImage());
+        book.setIntroduce(bookInfo.getDetailIntroduce());
+        book.setState(bookInfo.getState());
+        book.setChapterIndex(new Short(ChapterIndex));
+        book.setChapterPageIndex(new Short(ChapterPageIndex));
+        return book;
     }
 
     public String getBookName()
@@ -225,12 +241,12 @@ public class BookInfo implements Serializable
         this.detailNewChapter = detailNewChapter;
     }
 
-    public ArrayList<Chapter> getCharacters()
+    public ArrayList<ChapterInfo> getCharacters()
     {
         return characters;
     }
 
-    public void setCharacters(ArrayList<Chapter> characters)
+    public void setCharacters(ArrayList<ChapterInfo> characters)
     {
         this.characters = characters;
     }

@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.example.testactionbar.R;
 import com.example.testactionbar.common.IntentKey;
-import com.example.testactionbar.modle.Chapter;
+import com.example.testactionbar.modle.ChapterInfo;
 import com.example.testactionbar.view.adapter.ChapterListAapter;
 import com.example.testactionbar.view.base.BaseActionBarActivity;
 
@@ -20,7 +20,9 @@ public class BookChapterListActivity extends BaseActionBarActivity
 
     ListView listView;
     ChapterListAapter mAdapter;
-    ArrayList<Chapter> aChapters;
+    ArrayList<ChapterInfo> aChapters;
+    public static int FROM_NET = 0;
+    public static int FROM_DB = 1;
 
     @Override
     protected void onCreate(Bundle bundle)
@@ -29,7 +31,7 @@ public class BookChapterListActivity extends BaseActionBarActivity
         setContentView(R.layout.activity_book_chapter_list);
         initActionBar();
 
-        aChapters = (ArrayList<Chapter>) getIntent().getSerializableExtra(
+        aChapters = (ArrayList<ChapterInfo>) getIntent().getSerializableExtra(
                 IntentKey.INTENT_CHAPTER_LIST_KEY);
         listView = (ListView) findViewById(R.id.chapter_list);
 
@@ -41,7 +43,7 @@ public class BookChapterListActivity extends BaseActionBarActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Chapter chapter = (Chapter) parent.getAdapter().getItem(position);
+                ChapterInfo chapter = (ChapterInfo) parent.getAdapter().getItem(position);
                 Intent intent = new Intent(BookChapterListActivity.this,
                         ChapterContentActivity.class);
                 intent.putExtra(IntentKey.INTENT_CHAPTER_LIST_KEY, aChapters);
